@@ -1,0 +1,16 @@
+.loading-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0 0 3px;
+  &__dot {
+    display: inline-block;
+    border-radius: 1px;
+    width: 4px;
+    height: 4px;
+    background-color: theme('colors.grey');
+    &:not(:last-child) {
+      margin-right: 3px;
+    }
+  }
+}
