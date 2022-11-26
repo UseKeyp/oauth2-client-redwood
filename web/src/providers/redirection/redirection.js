@@ -2,10 +2,11 @@ import { useAuth } from '@redwoodjs/auth'
 import { isBrowser } from '@redwoodjs/prerender/browserUtils'
 import { navigate } from '@redwoodjs/router'
 
+import { logIn } from 'src/providers/auth'
 import { useOAuth } from 'src/providers/oAuth'
 
 const LOCAL_REDIRECT_TO_KEY = 'redirect_to'
-export const APPROVED_LOGIN_PROVIDERS = ['CHESS', 'DISCORD']
+export const APPROVED_LOGIN_PROVIDERS = ['KEYP']
 
 const saveRedirectTo = (redirect) =>
   redirect &&
@@ -23,7 +24,7 @@ const RedirectionContext = React.createContext({})
 const RedirectionProvider = ({ children }) => {
   const [state, setState] = React.useState({ isLoading: true })
 
-  const { logIn, reauthenticate } = useAuth()
+  const { reauthenticate } = useAuth()
   const { submitCodeGrant } = useOAuth()
 
   let url

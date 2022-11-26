@@ -9,23 +9,11 @@ export const OAUTH_URL_MUTATION = gql`
 `
 
 export const OAUTH_CODE_GRANT_MUTATION = gql`
-  mutation codeGrant(
-    $type: String!
-    $code: String!
-    $state: String
-    $accountId: String
-  ) {
-    codeGrant(type: $type, state: $state, code: $code, accountId: $accountId) {
+  mutation codeGrant($type: String!, $code: String!, $state: String) {
+    codeGrant(type: $type, state: $state, code: $code) {
       action
       text
       status
-      ramp {
-        id
-        address
-        accountNickname
-        isoCurrencyCode
-        type
-      }
     }
   }
 `

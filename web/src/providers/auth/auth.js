@@ -3,14 +3,15 @@ import { toast } from '@redwoodjs/web/toast'
 
 import { getErrorResponse } from 'src/utils/helpers'
 
-export const login = async (attributes) => {
+export const logIn = async (attributes) => {
+  console.log(attributes)
   try {
     /* eslint-disable-next-line no-undef */
     const { type, code, state } = attributes
     // eslint-disable-next-line no-undef
     // TODO: change back to RWJS_API_DBAUTH_URL, and troubleshoot
-    // const response = await fetch(global.RWJS_API_DBAUTH_URL, {
-    const response = await fetch('http://localhost:8911/auth', {
+    const response = await fetch(global.RWJS_API_DBAUTH_URL, {
+      // const response = await fetch('http://localhost:8911/auth', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ code, state, type, method: 'login' }),
@@ -46,7 +47,7 @@ const logout = async () => {
 class ExtendedRedwoodAuthProvider extends RedwoodAuthProvider {
   constructor(props) {
     super(props)
-    this.rwClient.logIn = login
+    this.rwClient.logIn = logIn
     this.rwClient.logout = logout
   }
 }

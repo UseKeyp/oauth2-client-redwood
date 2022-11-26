@@ -6,6 +6,8 @@ const APPROVED_LOGIN_PROVIDERS = [KEYP]
 
 export const validateLoginRequest = ({ type }) => {
   if (!APPROVED_LOGIN_PROVIDERS.includes(type)) {
-    throw new AuthenticationError('OAuth provider not available for login.')
+    throw new AuthenticationError(
+      `OAuth provider "${type}" not available for login.`
+    )
   }
 }
