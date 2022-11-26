@@ -1,6 +1,5 @@
 /* eslint-disable-next-line no-unused-vars */
 import { DbAuthHandler } from '@redwoodjs/api'
-import { InputError } from '@redwoodjs/graphql-server'
 
 import { validateLoginRequest } from 'src/lib/auth/validation'
 import { db } from 'src/lib/db'
@@ -34,7 +33,7 @@ export const handler = async (event, context) => {
     },
     signup: {
       handler: () => {
-        throw new InputError('signUp is not implemented')
+        throw 'signUp is not implemented'
       },
     },
     forgotPassword: {
@@ -70,8 +69,7 @@ export const handler = async (event, context) => {
   authHandler.login = async () => {
     const { code, state, type } = authHandler.params
     validateLoginRequest({ type })
-    if (!code || !state)
-      throw new InputError('logIn() Code or state not provided.')
+    if (!code || !state) throw 'logIn() Code or state not provided.'
 
     const tokens = await submitCodeGrant({
       state,

@@ -7329,6 +7329,7 @@ __metadata:
     "@redwoodjs/api": ^3.4.0
     "@redwoodjs/graphql-server": ^3.4.0
     oauth2orize: ^1.11.1
+    pkce-challenge: ^3.0.0
   languageName: unknown
   linkType: soft
 

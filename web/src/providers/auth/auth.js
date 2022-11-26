@@ -3,12 +3,14 @@ import { toast } from '@redwoodjs/web/toast'
 
 import { getErrorResponse } from 'src/utils/helpers'
 
-const login = async (attributes) => {
+export const login = async (attributes) => {
   try {
     /* eslint-disable-next-line no-undef */
     const { type, code, state } = attributes
     // eslint-disable-next-line no-undef
-    const response = await fetch(global.RWJS_API_DBAUTH_URL, {
+    // TODO: change back to RWJS_API_DBAUTH_URL, and troubleshoot
+    // const response = await fetch(global.RWJS_API_DBAUTH_URL, {
+    const response = await fetch('http://0.0.0.0:8911/auth', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ code, state, type, method: 'login' }),

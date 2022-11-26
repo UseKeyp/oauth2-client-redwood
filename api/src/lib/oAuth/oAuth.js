@@ -46,18 +46,12 @@ export const oAuthUrl = async (type) => {
   }
 }
 
-export const processCodeGrant = async ({ state, code, type, accountId }) => {
+export const processCodeGrant = async ({ state, code, type, _accountId }) => {
   try {
     logger.debug(`code grant - ${type}`)
     if (!types.includes(type)) throw `Unknown OAuth Provider - ${type}`
 
-    let tokens
-    if (type === PLAID) {
-      // Skip the normal OAuth db checking
-      tokens = await providers[PLAID].onSubmitCode({ code, accountId })
-    } else {
-      tokens = await submitCodeGrant({ state, code, type })
-    }
+    const tokens = await submitCodeGrant({ state, code, type })
     logger.debug({ custom: tokens }, 'onSubmitCode() response')
     return providers[type].onConnected(tokens)
   } catch (e) {
