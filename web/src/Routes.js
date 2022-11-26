@@ -18,6 +18,7 @@ const Routes = () => {
       <AllContextProviders>
         <Set wrap={DefaultLayout}>
           <Route path="/" page={HomePage} name="home" />
+          <Route path="/redirect/{type}" page={RedirectPage} name="redirect" />
           <Route path="/signin" page={SignInPage} name="signin" />
           <Route notfound page={NotFoundPage} />
           <Private unauthenticated="signin">

@@ -1,4 +1,4 @@
-import { routes, Link } from '@redwoodjs/router'
+import { routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
 
 import { useRedirection } from 'src/providers/redirection'
@@ -42,7 +42,6 @@ const Redirect = ({ type }) => {
     <div className="flex flex-col min-h-screen chess-background">
       <div className="flex flex-grow flex-col w-full justify-center align-center items-center">
         <div className="redirect-container w-80 sm:w-96">
-          <Link to={routes.home()}>Home</Link>
           <div className="redirect-contents w-full">
             <div
               className={`flex align-center bg-black p-4 rounded-lg border-2 border-${
