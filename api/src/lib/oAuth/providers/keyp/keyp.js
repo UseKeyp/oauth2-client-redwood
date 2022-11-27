@@ -1,6 +1,7 @@
 import fetch from 'cross-fetch'
 
 import { db } from 'src/lib/db'
+import { logger } from 'src/lib/logger'
 import { encodeBody, getExpiration } from 'src/lib/oAuth/helpers'
 
 export const KEYP = 'KEYP'
@@ -30,13 +31,14 @@ export const onSubmitCode = async (code, { memberId }) => {
       code,
     }
     const encodedBody = encodeBody(body)
+    logger.debug({ custom: body }, '/token body')
     const response = await fetch(KEYP_OAUTH_URL_TOKEN, {
       method: 'post',
       body: encodedBody,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     }).then((res) => {
       if (res.status != 200)
-        throw `Coinbase API failed for /token. ${res.status} - ${res.statusText}`
+        throw `Keyp API failed for /token. ${res.status} - ${res.statusText}`
       return res.json()
     })
     if (response.error)
@@ -48,7 +50,7 @@ export const onSubmitCode = async (code, { memberId }) => {
       expires_in: expiration,
     } = response
 
-    if (!refreshToken) throw 'Failed to get refresh_token from Coinbase'
+    if (!refreshToken) throw 'Failed to get refresh_token from Keyp'
     return {
       accessToken,
       accessTokenExpiration: getExpiration(expiration),
@@ -60,46 +62,19 @@ export const onSubmitCode = async (code, { memberId }) => {
   }
 }
 
-export const onConnected = async ({ accessToken, refreshToken, memberId }) => {
+export const onConnected = async ({ accessToken }) => {
   try {
-    const userDetails = await fetch('https://api.keyp.com/v2/user', {
+    const userDetails = await fetch(`${KEYP_API_DOMAIN}/api/userinfo`, {
       headers: { Authorization: `Bearer ${accessToken}` },
     }).then((res) => {
       if (res.status != 200)
-        throw 'Coinbase authorization failed, or secret invalid'
+        throw 'Keyp authorization failed, or secret invalid'
       return res.json()
     })
-    const accounts = await fetch(`https://api.keyp.com/v2/accounts`, {
-      headers: { Authorization: `Bearer ${accessToken}` },
-    }).then((res) => {
-      if (res.status != 200)
-        throw 'Coinbase authorization failed, or secret invalid'
-      return res.json()
-    })
-    const ethAccount = accounts.data.find(
-      (account) => account.currency === 'ETH'
-    )
-    const addresses = await fetch(
-      `https://api.keyp.com/v2/accounts/${ethAccount.id}/addresses`,
-      { headers: { Authorization: `Bearer ${accessToken}` } }
-    ).then((res) => {
-      if (res.status != 200)
-        throw 'Coinbase authorization failed, or secret invalid'
-      return res.json()
-    })
-    const address = addresses.data[0].address
-    await db.ramp.create({
-      data: {
-        address,
-        email: userDetails.data.email,
-        type: KEYP,
-        accessToken,
-        refreshToken,
-        member: { connect: { id: memberId } },
-      },
-    })
+    logger.debug({ custom: userDetails }, 'userDetails')
+    // For login-type oauth providers, return user id
     return {
-      status: 'SUCCESS',
+      id: userDetails.user_id,
     }
   } catch (e) {
     throw `onConnected() ${e}`

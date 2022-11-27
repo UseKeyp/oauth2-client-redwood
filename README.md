@@ -2,6 +2,7 @@ OAuth Server libraries: https://oauth.net/code/nodejs/
 
 Have a test playground- https://github.com/simov/grant
 
+Follows the `passport-oauth2` client strategy https://www.passportjs.org/packages/passport-oauth2/
 
 1. Setup dbAuth
 
@@ -27,3 +28,12 @@ SESSION_SECRET=abc123
 
 
 
+
+
+---
+
+# TODO
+
+## web
+
+Don't wrap web auth client? Weird that login doesnt work anymore to be injected

@@ -75,6 +75,7 @@ const RedirectionProvider = ({ children }) => {
       await submitCodeGrant({ code, grantState, type })
     if (codeGrantError)
       return setState({ errorMessage: codeGrantError, isLoading: false })
+    console.log('submitCodeGrant success!')
     setState({ successMessage: successMessageCodeGrant, isLoading: false })
   }
 

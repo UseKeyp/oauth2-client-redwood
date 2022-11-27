@@ -1,4 +1,4 @@
-import { routes } from '@redwoodjs/router'
+import { navigate, routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
 
 import { useRedirection } from 'src/providers/redirection'
@@ -28,7 +28,7 @@ const Redirect = ({ type }) => {
     } else {
       callToAction = (
         <button
-          to={routes.signin()}
+          onClick={() => navigate(routes.signin())}
           className="text-s mt-6"
           size="large"
           color="green"

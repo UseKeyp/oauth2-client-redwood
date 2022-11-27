@@ -86,6 +86,7 @@ const OAuthProvider = ({ children }) => {
         },
       })
       const { codeGrant } = data
+      console.log(codeGrant)
       if (codeGrant.status === 'SUCCESS') {
         setState({ isLoading: false })
         return {

@@ -9,14 +9,11 @@ export const logIn = async (attributes) => {
     /* eslint-disable-next-line no-undef */
     const { type, code, state } = attributes
     // eslint-disable-next-line no-undef
-    // TODO: change back to RWJS_API_DBAUTH_URL, and troubleshoot
     const response = await fetch(global.RWJS_API_DBAUTH_URL, {
-      // const response = await fetch('http://localhost:8911/auth', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ code, state, type, method: 'login' }),
     })
-
     return await response.json()
   } catch (e) {
     /* eslint-disable-next-line no-console */
@@ -47,6 +44,8 @@ const logout = async () => {
 class ExtendedRedwoodAuthProvider extends RedwoodAuthProvider {
   constructor(props) {
     super(props)
+    // NOTE: this no longer works. Needs fixing or removed in favor of eg:
+    // import { logIn } from 'src/providers/auth'
     this.rwClient.logIn = logIn
     this.rwClient.logout = logout
   }
