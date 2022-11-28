@@ -6,7 +6,7 @@
 # https://redwoodjs.com/docs/app-configuration-redwood-toml
 
 [web]
-  title = "oauth2-demo-client"
+  title = "oauth2-client-redwood"
   port = 8910
   host = "0.0.0.0"
   apiUrl = "${REDWOOD_API_URL:/api}"

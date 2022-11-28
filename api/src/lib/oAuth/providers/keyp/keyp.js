@@ -72,11 +72,15 @@ export const onConnected = async ({ accessToken }) => {
       return res.json()
     })
     logger.debug({ custom: userDetails }, 'userDetails')
-    // For login-type oauth providers, return user id
-    return {
-      id: userDetails.user_id,
-    }
+    // For login-type oauth providers, create the user and return the object
+    const user = await db.user.upsert({
+      update: { username: userDetails.name },
+      create: { id: userDetails.user_id, username: userDetails.name },
+      where: { id: userDetails.user_id },
+    })
+    return user
   } catch (e) {
+    logger.error(e)
     throw `onConnected() ${e}`
   }
 }
