@@ -28,8 +28,7 @@ To add any new provider, simply create a new file in the providers directory.
 - Server-side token exchange, refreshing, and revoking
 - Web-side redirection handling
 - Any provider can also serve as a login method using "wrapped dbAuth" (as first introduced in the community forum post [Combining dbAuth + OAuth2](https://community.redwoodjs.com/t/combining-dbauth-oauth2/2452/8))
-
-There are no external dependencies or 3rd-party services required.
+- No 3rd-party services required, and only one external dependency (pkce-challenge)
 
 ## Discussion 💬
 
@@ -60,7 +59,7 @@ SESSION_SECRET=abc123
 2. Install necessary dependencies
 
 ```bash
- cd api && yarn add oauth2orize pkce-challenge
+ cd api && yarn add pkce-challenge
 ```
 
 3. Update the schema as necessary
