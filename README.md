@@ -11,6 +11,10 @@
 
 If you'd like to join our team please let us know. Happy hacking!
 
+<p align="center">
+<img src="oauth2-client-redwood.gif"/>
+</p>
+
 > A feature-complete general-purpose OAuth2 client built with RedwoodJS.
 
 Designed to be both an authentication/login method for your users, and/or a general way to fetch OAuth2 user data from third-party apps (eg. "connect your Twitch account"). What's included:
@@ -25,9 +29,10 @@ The code for the authority server (the one providing the user data) is here: htt
 
 All the OAuth code is custom; the only external dependency is optional `pkce-challenge`.
 
-## Next steps
+## Discussion
 
-- [ ] Create a developer dashboard for creating API OAuth client credentials, using RedwoodJS.
+[Redwood Community Forum post](https://community.redwoodjs.com/t/i-made-passportjs-for-redwood/4343?u=pi0neerpat)
+
 ## Usage 📙
 
 DEMO link coming soon
@@ -55,6 +60,9 @@ SESSION_SECRET=abc123
 
 3. Update the schema as necessary
 
+## Next steps
+
+- [ ] Create a developer dashboard for creating API OAuth client credentials, using RedwoodJS.
 ## Resources 🧑‍💻
 
 OAuth Server libraries: https://oauth.net/code/nodejs/
