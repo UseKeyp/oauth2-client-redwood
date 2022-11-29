@@ -12,24 +12,26 @@
 If you'd like to join our team please let us know. Happy hacking!
 
 <p align="center">
-<img src="oauth2-client-redwood.gif"/>
+<img width="600px" src="oauth2-client-redwood.gif"/>
 </p>
 
-> A feature-complete general-purpose OAuth2 client built with RedwoodJS.
+> A feature-complete general-purpose OAuth2 client built using Redwood.
 
-Designed to be both an authentication/login method for your users, and/or a general way to fetch OAuth2 user data from third-party apps (eg. "connect your Twitch account"). What's included:
+## Providers available
 
-- "Wrapped" dbAuth client + server (as first introduced in the community forum post [Combining dbAuth + OAuth2](https://community.redwoodjs.com/t/combining-dbauth-oauth2/2452/8))
-- Web-side Oauth and Redirect tooling
-- Server-side grant-token exchange, refreshing, revoking
+Coinbase, Twitch, Chess.com, Plaid, and a demo self-hosted provider called "keyp" ([pi0neerpat/oauth2-demo-server](https://github.com/pi0neerpat/oauth2-demo-server)).
 
-Essentially a custom-implementation of [`passport-oauth2`](https://www.passportjs.org/packages/passport-oauth2/)
+To add any new provider, simply create a new file in the providers directory.
 
-The code for the authority server (the one providing the user data) is here: https://github.com/pi0neerpat/oauth2-demo-server
+## Features
 
-All the OAuth code is custom; the only external dependency is optional `pkce-challenge`.
+- Server-side token exchange, refreshing, and revoking
+- Web-side redirection handling
+- Any provider can also serve as a login method using "wrapped dbAuth" (as first introduced in the community forum post [Combining dbAuth + OAuth2](https://community.redwoodjs.com/t/combining-dbauth-oauth2/2452/8))
 
-## Discussion
+There are no external dependencies or 3rd-party services required.
+
+## Discussion 💬
 
 [Redwood Community Forum post](https://community.redwoodjs.com/t/i-made-passportjs-for-redwood/4343?u=pi0neerpat)
 
@@ -37,6 +39,8 @@ All the OAuth code is custom; the only external dependency is optional `pkce-cha
 
 DEMO link coming soon
 ## Implement your own
+
+NOTE: if you're not using the provider for logins, just skip to step 4.
 
 1. Setup dbAuth
 
@@ -60,9 +64,38 @@ SESSION_SECRET=abc123
 
 3. Update the schema as necessary
 
+```graphql
+model User {
+  id           String   @id
+  username     String?  @unique
+  address      String?  @unique
+  email        String?  @unique
+  // --------------- STATE --------------
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  refreshToken String?
+  accessToken  String?
+  OAuth        OAuth[]
+  betaAccess   Boolean  @default(false)
+}
+
+model OAuth {
+  state         String   @id
+  codeChallenge String
+  codeVerifier  String
+  createdAt     DateTime @default(now())
+  user          User?    @relation(fields: [userId], references: [id])
+  userId        String?
+}
+```
+
+4. Modify the provider files
+
+If you're adding your own provider, you'll need to decide what you want to happen once a user is connected. For example, you may want to create a new user in your database, or you may want to update an existing user with new data from the provider (eg. a Twitch username).
 ## Next steps
 
-- [ ] Create a developer dashboard for creating API OAuth client credentials, using RedwoodJS.
+- [ ] Add more providers (your help is needed!)
+- [ ] Create a developer dashboard for generating new API OAuth client credentials, using RedwoodJS.
 ## Resources 🧑‍💻
 
 OAuth Server libraries: https://oauth.net/code/nodejs/
