@@ -35,12 +35,13 @@ There are no external dependencies or 3rd-party services required.
 
 [Redwood Community Forum post](https://community.redwoodjs.com/t/i-made-passportjs-for-redwood/4343?u=pi0neerpat)
 
-## Usage 📙
+## Demo 📙
 
-DEMO link coming soon
-## Implement your own
+Haven't had time to host a demo yet.
 
-NOTE: if you're not using the provider for logins, just skip to step 4.
+## Implement in your app
+
+NOTE: if you're not using a provider for logins, you can skip to step 4.
 
 1. Setup dbAuth
 
@@ -92,10 +93,18 @@ model OAuth {
 4. Modify the provider files
 
 This is where you'll decide what you want to happen once a user is connected to the provider. For example, you may want to create a new user in your database, or you may want to update an existing user with new data from the provider (eg. a Twitch username).
+
+A few notes on the current example providers, and the use-cases they are meant to serve. All of these can be changed easily to fit your needs.
+
+- **Coinbase**: Grab the user's ethereum address so you can send them crypto.
+- **Twitch**: Grab the user's Twitch username.
+- **Chess.com**: Used as a login provider, but you could easily modify it to just grab user data.
+- **Plaid**: Their OAuth2 implementation requires some additional code which I've intentially excluded to keep things here clean + simple. I don't recommend using this as a template for new providers. Also, Plaid is an evil company and you should try to avoid using them.
 ## Next steps
 
 - [ ] Add more providers (your help needed!)
-- [ ] Create a developer dashboard for generating new API OAuth client credentials, using RedwoodJS. This is only tangentially related, but we are planning to build it anyways, so I thought I'd mention it here.
+- [ ] Create a developer dashboard for generating new API OAuth client credentials, using RedwoodJS. This is tangentially related, but we are planning to build it anyways, so I thought I'd mention it here.
+
 ## Resources 🧑‍💻
 
 OAuth Server libraries: https://oauth.net/code/nodejs/
