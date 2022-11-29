@@ -91,11 +91,11 @@ model OAuth {
 
 4. Modify the provider files
 
-If you're adding your own provider, you'll need to decide what you want to happen once a user is connected. For example, you may want to create a new user in your database, or you may want to update an existing user with new data from the provider (eg. a Twitch username).
+This is where you'll decide what you want to happen once a user is connected to the provider. For example, you may want to create a new user in your database, or you may want to update an existing user with new data from the provider (eg. a Twitch username).
 ## Next steps
 
-- [ ] Add more providers (your help is needed!)
-- [ ] Create a developer dashboard for generating new API OAuth client credentials, using RedwoodJS.
+- [ ] Add more providers (your help needed!)
+- [ ] Create a developer dashboard for generating new API OAuth client credentials, using RedwoodJS. This is only tangentially related, but we are planning to build it anyways, so I thought I'd mention it here.
 ## Resources 🧑‍💻
 
 OAuth Server libraries: https://oauth.net/code/nodejs/
