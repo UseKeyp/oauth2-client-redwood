@@ -21,16 +21,16 @@ Designed to be both an authentication/login method for your users, and/or a gene
 
 Essentially a custom-implementation of [`passport-oauth2`](https://www.passportjs.org/packages/passport-oauth2/)
 
-The demonstration app uses an example OAuth2 authority provider: https://github.com/pi0neerpat/oauth2-demo-server
+The code for the authority server (the one providing the user data) is here: https://github.com/pi0neerpat/oauth2-demo-server
 
-All the OAuth code is custom; the only external dependency is `pkce-challenge` which is not always required.
+All the OAuth code is custom; the only external dependency is optional `pkce-challenge`.
 
+## Next steps
+
+- [ ] Create a developer dashboard for creating API OAuth client credentials, using RedwoodJS.
 ## Usage 📙
 
-```bash
-yarn rw dev
-```
-s
+DEMO link coming soon
 ## Implement your own
 
 1. Setup dbAuth
