@@ -1,12 +1,13 @@
-import Sentry from 'src/lib/sentry'
-import { AuthenticationError } from '@redwoodjs/graphql-server'
-import { db } from 'src/lib/db'
 import { EnvelopError } from '@envelop/core'
 
+import { AuthenticationError } from '@redwoodjs/graphql-server'
+
+import { db } from 'src/lib/db'
+import { logger } from 'src/lib/logger'
 import { createMauticContact } from 'src/lib/mautic'
 import { fetchMember } from 'src/lib/members'
+import Sentry from 'src/lib/sentry'
 import { getTorusPublicAddress } from 'src/lib/torus/torus'
-import { logger } from 'src/lib/logger'
 
 export const onConnected = async ({ refreshToken, accessToken, decoded }) => {
   try {

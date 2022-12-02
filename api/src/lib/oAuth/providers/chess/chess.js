@@ -4,7 +4,6 @@ import { decode as decodeJwt } from 'jsonwebtoken'
 import { isDevelopment } from 'src/lib/helpers'
 import { logger } from 'src/lib/logger'
 import { encodeBody, getExpiration } from 'src/lib/oAuth/helpers'
-import Sentry from 'src/lib/sentry'
 
 export const CHESS = 'CHESS'
 export const CHESS_OAUTH_URL_AUTHORIZE = 'https://oauth.chess.com/authorize'
@@ -80,7 +79,6 @@ const onSubmitCode = async (code, { codeVerifier, memberId }) => {
       memberId,
     }
   } catch (e) {
-    Sentry.captureException(e)
     throw `onSubmitCode() ${e}`
   }
 }
