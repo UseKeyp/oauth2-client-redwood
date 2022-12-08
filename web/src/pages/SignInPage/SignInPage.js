@@ -67,6 +67,15 @@ const LoginPortal = () => {
               <span className="mr-2">Sign in with Keyp</span>
             </div>
           </button>
+          <button
+            onClick={() => onSubmitSignUp('DISCORD')}
+            className="login-button"
+            size="small"
+          >
+            <div className="flex justify-center align-center items-center m-1">
+              <span className="mr-2">Sign in with Discord</span>
+            </div>
+          </button>
           {errorText && <div className="mt-2 rw-cell-error">{errorText}</div>}
         </div>
         <div className="w-full text-center"></div>

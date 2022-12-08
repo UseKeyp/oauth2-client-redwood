@@ -6,7 +6,7 @@ import { logIn } from 'src/providers/auth'
 import { useOAuth } from 'src/providers/oAuth'
 
 const LOCAL_REDIRECT_TO_KEY = 'redirect_to'
-export const APPROVED_LOGIN_PROVIDERS = ['KEYP']
+export const APPROVED_LOGIN_PROVIDERS = ['KEYP', 'DISCORD']
 
 const saveRedirectTo = (redirect) =>
   redirect &&

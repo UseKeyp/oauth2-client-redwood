@@ -19,20 +19,19 @@ If you'd like to join our team please let us know. Happy hacking!
 
 ## Providers available
 
-Coinbase, Twitch, Chess.com, Plaid, and a demo self-hosted provider called "keyp" ([pi0neerpat/oauth2-demo-server](https://github.com/pi0neerpat/oauth2-demo-server)).
+Discord, Coinbase, Twitch, Chess.com, Plaid, and a demo self-hosted provider called "keyp" ([pi0neerpat/oauth2-demo-server](https://github.com/pi0neerpat/oauth2-demo-server)).
 
 To add any new provider, simply create a new file in the providers directory.
 
 ## Features
 
-- Server-side token exchange, refreshing, and revoking
-- Web-side redirection handling
-- Any provider can also serve as a login method using "wrapped dbAuth" (as first introduced in the community forum post [Combining dbAuth + OAuth2](https://community.redwoodjs.com/t/combining-dbauth-oauth2/2452/8))
+- All providers can be used for *Authentication* or *Authorization*
+- Web-side redirection UI
 - No 3rd-party services required, and only one external dependency (pkce-challenge)
-
 ## Discussion 💬
 
-[Redwood Community Forum post](https://community.redwoodjs.com/t/i-made-passportjs-for-redwood/4343?u=pi0neerpat)
+
+This builds upon previous the work "wrapped dbAuth" (as first introduced in the community forum post [Combining dbAuth + OAuth2](https://community.redwoodjs.com/t/combining-dbauth-oauth2/2452/8)). Current discussion is happening in the [Redwood Community Forum post](https://community.redwoodjs.com/t/i-made-passportjs-for-redwood/4343?u=pi0neerpat)
 
 ## Demo 📙
 
@@ -40,7 +39,7 @@ Haven't had time to host a demo yet.
 
 ## Implement in your app
 
-NOTE: if you're not using a provider for logins, you can skip to step 4.
+NOTE: if you're using a provider only for authorization, skip to step 3.
 
 1. Setup dbAuth
 
@@ -63,6 +62,8 @@ SESSION_SECRET=abc123
 ```
 
 3. Update the schema as necessary
+
+Include any additional data from the provider you want to store in your database. For example, if you want to store the user's Twitch username, you can add it to the User model.
 
 ```graphql
 model User {
@@ -91,18 +92,26 @@ model OAuth {
 
 4. Modify the provider files
 
-This is where you'll decide what you want to happen once a user is connected to the provider. For example, you may want to create a new user in your database, or you may want to update an existing user with new data from the provider (eg. a Twitch username).
+This is where you'll decide what you want to happen once a user is connected to the provider. For example, you may want to create a new user in your database (authentication use-case), or you may want to supplement an existing user with new data from the provider (authorization use-case).
 
-A few notes on the current example providers, and the use-cases they are meant to serve. All of these can be changed easily to fit your needs.
+Here's how the current example providers are currently set up, but they can be changed to fit your needs.
 
-- **Coinbase**: Grab the user's ethereum address so you can send them crypto.
-- **Twitch**: Grab the user's Twitch username.
-- **Chess.com**: Used as a login provider, but you could easily modify it to just grab user data.
-- **Plaid**: Their OAuth2 implementation requires some additional code which I've intentially excluded to keep things here clean + simple. I don't recommend using this as a template for new providers. Also, Plaid is an evil company and you should try to avoid using them.
+#### Authentication
+
+- **Discord**: Create a user with their Discord profile, email, handle, and avatar for creating a user.
+- **Chess.com**: Create a user with their Chess.com profile, email, handle, and avatar for creating a user.
+- **Keyp** (in development): Create a new user with their wallet address.
+
+Note if you are using a provider for authentication, you will need add it to the web [redirection provider](https://github.com/pi0neerpat/oauth2-client-redwood/blob/559da2f738a9755405a2a2cf800ca5fca5c23835/web/src/providers/redirection/redirection.js#L9) so that the appropriate query is made upon redirection back to the app.
+
+#### Authorization
+
+- **Coinbase**: Grab their ethereum deposit address.
+- **Twitch**: Grab their Twitch username.
+- **Plaid**: Grab their Plaid link_token to use with an approved app. (Plaid is evil and you should avoid using them)
 ## Next steps
 
 - [ ] Add more providers (your help needed!)
-- [ ] Create a developer dashboard for generating new API OAuth client credentials, using RedwoodJS. This is tangentially related, but we are planning to build it anyways, so I thought I'd mention it here.
 
 ## Resources 🧑‍💻
 
