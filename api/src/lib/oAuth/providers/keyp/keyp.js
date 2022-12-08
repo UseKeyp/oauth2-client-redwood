@@ -19,6 +19,7 @@ const params = {
   client_id: process.env.KEYP_CLIENT_ID,
   scope: KEYP_SCOPE,
   redirect_uri: KEYP_REDIRECT_URI,
+  login_provider: 'discord', // TODO: remove this in favor of user-selection
 }
 
 export const onSubmitCode = async (code, { memberId }) => {

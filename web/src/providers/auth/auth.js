@@ -44,8 +44,6 @@ const logout = async () => {
 class ExtendedRedwoodAuthProvider extends RedwoodAuthProvider {
   constructor(props) {
     super(props)
-    // NOTE: this no longer works. Needs fixing or removed in favor of eg:
-    // import { logIn } from 'src/providers/auth'
     this.rwClient.logIn = logIn
     this.rwClient.logout = logout
   }
