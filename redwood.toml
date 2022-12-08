@@ -9,8 +9,8 @@
   title = "oauth2-client-redwood"
   port = 8910
   host = "0.0.0.0"
-  apiUrl = "${REDWOOD_API_URL:/api}"
-    # apiUrl = "/.redwood/functions" # you can customise graphql and dbauth urls individually too: see https://redwoodjs.com/docs/app-configuration-redwood-toml#api-paths
+  apiUrl = "/api"
+    # apiUrl = "/api"
   includeEnvironmentVariables = [] # any ENV vars that should be available to the web side, see https://redwoodjs.com/docs/environment-variables#web
 [api]
   port = 8911
