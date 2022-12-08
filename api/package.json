@@ -5,6 +5,8 @@
   "dependencies": {
     "@redwoodjs/api": "^3.4.0",
     "@redwoodjs/graphql-server": "^3.4.0",
+    "@sentry/node": "^7.24.2",
+    "@sentry/tracing": "^7.24.2",
     "pkce-challenge": "^3.0.0"
   }
 }

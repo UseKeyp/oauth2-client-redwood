@@ -4184,6 +4184,61 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@sentry/core@npm:7.24.2":
+  version: 7.24.2
+  resolution: "@sentry/core@npm:7.24.2"
+  dependencies:
+    "@sentry/types": 7.24.2
+    "@sentry/utils": 7.24.2
+    tslib: ^1.9.3
+  checksum: ee49aceebefb26d813740ac9420e690dd827a4d159c6b7a46f2e864efc9d78827cd63fa8cdededd4210795534f6e6ce907c2c1cde05ffd19cbe230c42ecd5fab
+  languageName: node
+  linkType: hard
+
+"@sentry/node@npm:^7.24.2":
+  version: 7.24.2
+  resolution: "@sentry/node@npm:7.24.2"
+  dependencies:
+    "@sentry/core": 7.24.2
+    "@sentry/types": 7.24.2
+    "@sentry/utils": 7.24.2
+    cookie: ^0.4.1
+    https-proxy-agent: ^5.0.0
+    lru_map: ^0.3.3
+    tslib: ^1.9.3
+  checksum: 5835de78c21075d3a6dc806cb54149fb5ad632943e34e4bbc9b4cda7b359f4890db707e1b19417b7635bdedd4f881a6a72d4c589ffbea1dabe71eeace6ae7969
+  languageName: node
+  linkType: hard
+
+"@sentry/tracing@npm:^7.24.2":
+  version: 7.24.2
+  resolution: "@sentry/tracing@npm:7.24.2"
+  dependencies:
+    "@sentry/core": 7.24.2
+    "@sentry/types": 7.24.2
+    "@sentry/utils": 7.24.2
+    tslib: ^1.9.3
+  checksum: 458b14103cba5ad16659996ec13cd7cda32eb8462fddd70591734b63a550d3fe344303a5386e7b78a30e4fb732ee71ed6a5aa5ec761911a4071b521173c84d93
+  languageName: node
+  linkType: hard
+
+"@sentry/types@npm:7.24.2":
+  version: 7.24.2
+  resolution: "@sentry/types@npm:7.24.2"
+  checksum: c4b464b37a94cc4250cf03e9d80d223cb17de44de306ceaef2812a3230eb67c5e2cb29df791dfd4e6d1bc625181e372b497f8cc78997417cff66391b9f941e74
+  languageName: node
+  linkType: hard
+
+"@sentry/utils@npm:7.24.2":
+  version: 7.24.2
+  resolution: "@sentry/utils@npm:7.24.2"
+  dependencies:
+    "@sentry/types": 7.24.2
+    tslib: ^1.9.3
+  checksum: 5aecf523a42f18528d84ac9b67e2a40a73aa5cf924c8bc1cae197e72ff5210ac4a639fdb6dc343db78076e56960303262ddfd6cbee4ef36487d90296f3c57dcf
+  languageName: node
+  linkType: hard
+
 "@sinclair/typebox@npm:^0.24.1":
   version: 0.24.50
   resolution: "@sinclair/typebox@npm:0.24.50"
@@ -7328,7 +7383,8 @@ __metadata:
   dependencies:
     "@redwoodjs/api": ^3.4.0
     "@redwoodjs/graphql-server": ^3.4.0
-    oauth2orize: ^1.11.1
+    "@sentry/node": ^7.24.2
+    "@sentry/tracing": ^7.24.2
     pkce-challenge: ^3.0.0
   languageName: unknown
   linkType: soft
@@ -9633,7 +9689,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cookie@npm:^0.4.2":
+"cookie@npm:^0.4.1, cookie@npm:^0.4.2":
   version: 0.4.2
   resolution: "cookie@npm:0.4.2"
   checksum: beab41fbd7c20175e3a2799ba948c1dcc71ef69f23fe14eeeff59fc09f50c517b0f77098db87dbb4c55da802f9d86ee86cdc1cd3efd87760341551838d53fca2
@@ -10292,7 +10348,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"debug@npm:2.6.9, debug@npm:2.x.x, debug@npm:^2.2.0, debug@npm:^2.3.3, debug@npm:^2.6.9":
+"debug@npm:2.6.9, debug@npm:^2.2.0, debug@npm:^2.3.3, debug@npm:^2.6.9":
   version: 2.6.9
   resolution: "debug@npm:2.6.9"
   dependencies:
@@ -16400,6 +16456,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lru_map@npm:^0.3.3":
+  version: 0.3.3
+  resolution: "lru_map@npm:0.3.3"
+  checksum: d861f14a142a4a74ebf8d3ad57f2e768a5b820db4100ae53eed1a64eb6350912332e6ebc87cb7415ad6d0cd8f3ce6d20beab9a5e6042ccb5996ea0067a220448
+  languageName: node
+  linkType: hard
+
 "lz-string@npm:^1.4.4":
   version: 1.4.4
   resolution: "lz-string@npm:1.4.4"
@@ -17523,17 +17586,6 @@ __metadata:
     yarn: ^1.22.19
   languageName: unknown
   linkType: soft
-
-"oauth2orize@npm:^1.11.1":
-  version: 1.11.1
-  resolution: "oauth2orize@npm:1.11.1"
-  dependencies:
-    debug: 2.x.x
-    uid2: 0.0.x
-    utils-merge: 1.x.x
-  checksum: fa43eafd79cbf2e5d7217e1b203b34f9d1763d3cb50529ddfd6ba0afc11093e197fb6a0f7a37ea8a9de4e919e447d600c6ec00f87eaf223462e0a807ed9595a4
-  languageName: node
-  linkType: hard
 
 "object-assign@npm:^4.0.1, object-assign@npm:^4.1.0, object-assign@npm:^4.1.1":
   version: 4.1.1
@@ -22364,7 +22416,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:^1.8.1, tslib@npm:^1.9.2":
+"tslib@npm:^1.8.1, tslib@npm:^1.9.2, tslib@npm:^1.9.3":
   version: 1.14.1
   resolution: "tslib@npm:1.14.1"
   checksum: 69ae09c49eea644bc5ebe1bca4fa4cc2c82b7b3e02f43b84bd891504edf66dbc6b2ec0eef31a957042de2269139e4acff911e6d186a258fb14069cd7f6febce2
@@ -22522,13 +22574,6 @@ __metadata:
   bin:
     uglifyjs: bin/uglifyjs
   checksum: 8b7fcdca69deb284fed7d2025b73eb747ce37f9aca6af53422844f46427152d5440601b6e2a033e77856a2f0591e4167153d5a21b68674ad11f662034ec13ced
-  languageName: node
-  linkType: hard
-
-"uid2@npm:0.0.x":
-  version: 0.0.4
-  resolution: "uid2@npm:0.0.4"
-  checksum: c3ed69da75d117214891f4743a1d8521db823d7a2f57644c1a9ae8b3bf25f0ba666d893264bf7e22be3dbbaa292d35a23d71d06ce7283458a65e8dd137c5c362
   languageName: node
   linkType: hard
 
@@ -22997,7 +23042,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"utils-merge@npm:1.0.1, utils-merge@npm:1.x.x":
+"utils-merge@npm:1.0.1":
   version: 1.0.1
   resolution: "utils-merge@npm:1.0.1"
   checksum: 02ba649de1b7ca8854bfe20a82f1dfbdda3fb57a22ab4a8972a63a34553cf7aa51bc9081cf7e001b035b88186d23689d69e71b510e610a09a4c66f68aa95b672
