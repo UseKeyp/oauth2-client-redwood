@@ -1,30 +1,18 @@
 import { useEffect } from 'react'
 
 import { useAuth } from '@redwoodjs/auth'
-import { routes, navigate, useParams } from '@redwoodjs/router'
+import { useParams } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
 
-import { login } from 'src/providers/auth'
 import { saveRedirectTo } from 'src/providers/redirection'
-import { useToast } from 'src/providers/toast'
 
 const LoginPortal = () => {
   const { signUp, isAuthenticated, reauthenticate } = useAuth()
 
   const { error, redirectTo } = useParams()
-  const { toast } = useToast()
   const [errorText, setErrorText] = React.useState('')
   const getErrorText = (error) => {
     if (error === 'expired') return `Session expired, please log in again.`
-  }
-
-  const onSubmitSignUp = async (type) => {
-    const response = await signUp({ type })
-    if (response.url) {
-      window.location = response.url
-    } else {
-      toast.error('Something went wrong')
-    }
   }
 
   useEffect(() => {
@@ -59,7 +47,7 @@ const LoginPortal = () => {
 
         <div className="login-portal-container--button-wrapper">
           <button
-            onClick={() => onSubmitSignUp('KEYP')}
+            onClick={() => signUp({ type: 'KEYP' })}
             className="login-button"
             size="small"
           >
