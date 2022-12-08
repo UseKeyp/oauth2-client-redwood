@@ -36,7 +36,7 @@ To add any new provider, simply create a new file in the providers directory.
 
 ## Demo 📙
 
-https://oauth2-client-redwood.vercel.app
+Haven't had time to host a demo yet.
 
 ## Implement in your app
 

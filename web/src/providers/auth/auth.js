@@ -17,7 +17,7 @@ export const logIn = async (attributes) => {
     return await response.json()
   } catch (e) {
     /* eslint-disable-next-line no-console */
-    const errorMessage = getErrorResponse(`${e}.`, 'logIn').error.message
+    const errorMessage = getErrorResponse(`${e}.`, 'login').error.message
     toast.error(errorMessage)
     /* eslint-disable-next-line no-console */
     console.log(errorMessage)
@@ -41,27 +41,6 @@ const logout = async () => {
   }
 }
 
-const signUp = async ({ type }) => {
-  try {
-    /* eslint-disable-next-line no-undef */
-    const response = await fetch(global.RWJS_API_DBAUTH_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ type }),
-    })
-    if (response.url) {
-      window.location = response.url
-    } else {
-      toast.error('Something went wrong')
-    }
-  } catch (e) {
-    /* eslint-disable-next-line no-console */
-    const errorMessage = getErrorResponse(`${e}.`, 'signUp').error.message
-    toast.error(errorMessage)
-    /* eslint-disable-next-line no-console */
-    console.log(errorMessage)
-  }
-}
 class ExtendedRedwoodAuthProvider extends RedwoodAuthProvider {
   constructor(props) {
     super(props)
@@ -69,7 +48,6 @@ class ExtendedRedwoodAuthProvider extends RedwoodAuthProvider {
     // import { logIn } from 'src/providers/auth'
     this.rwClient.logIn = logIn
     this.rwClient.logout = logout
-    this.rwClient.signUp = signUp
   }
 }
 
