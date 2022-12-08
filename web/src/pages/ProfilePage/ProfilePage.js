@@ -10,6 +10,8 @@ const ProfilePage = () => {
       <ul>
         <li>id: {currentUser?.id}</li>
         <li>username: {currentUser?.username}</li>
+        <li>accessToken: {currentUser?.accessToken}</li>
+        <li>refreshToken: {currentUser?.refreshToken}</li>
       </ul>
     </>
   )

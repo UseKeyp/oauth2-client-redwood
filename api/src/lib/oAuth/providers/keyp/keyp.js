@@ -62,7 +62,7 @@ export const onSubmitCode = async (code, { memberId }) => {
   }
 }
 
-export const onConnected = async ({ accessToken }) => {
+export const onConnected = async ({ accessToken, refreshToken }) => {
   try {
     const userDetails = await fetch(`${KEYP_API_DOMAIN}/api/userinfo`, {
       headers: { Authorization: `Bearer ${accessToken}` },
@@ -74,8 +74,13 @@ export const onConnected = async ({ accessToken }) => {
     logger.debug({ custom: userDetails }, 'userDetails')
     // For login-type oauth providers, create the user and return the object
     const user = await db.user.upsert({
-      update: { username: userDetails.name },
-      create: { id: userDetails.user_id, username: userDetails.name },
+      update: { username: userDetails.name, accessToken, refreshToken },
+      create: {
+        id: userDetails.user_id,
+        username: userDetails.name,
+        accessToken,
+        refreshToken,
+      },
       where: { id: userDetails.user_id },
     })
     return user

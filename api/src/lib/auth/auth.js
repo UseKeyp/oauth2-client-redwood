@@ -29,7 +29,8 @@ export const getCurrentUser = async (session) => {
   const user = await db.user.findUnique({
     where: { id: session.id },
     // Warning: don't send any confidential data here
-    select: { id: true, username: true },
+    // You should probably not send the API tokens to the frontend. This is for Demo purposes only.
+    select: { id: true, username: true, accessToken: true, refreshToken: true },
   })
   logger.debug({ custom: user }, 'getCurrentUser')
   return user
