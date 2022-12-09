@@ -9,8 +9,7 @@
   title = "oauth2-client-redwood"
   port = 8910
   host = "0.0.0.0"
-  apiUrl = "http://0.0.0.0:8911"
-    # apiUrl = "/api"
+  apiUrl = "${REDWOOD_API_URL:/api}"
   includeEnvironmentVariables = [] # any ENV vars that should be available to the web side, see https://redwoodjs.com/docs/environment-variables#web
 [api]
   port = 8911
