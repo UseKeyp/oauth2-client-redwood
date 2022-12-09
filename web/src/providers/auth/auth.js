@@ -3,7 +3,7 @@ import { toast } from '@redwoodjs/web/toast'
 
 import { getErrorResponse } from 'src/utils/helpers'
 
-export const logIn = async (attributes) => {
+const logIn = async (attributes) => {
   console.log(attributes)
   try {
     /* eslint-disable-next-line no-undef */
