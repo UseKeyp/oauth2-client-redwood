@@ -12,7 +12,7 @@ export const oAuthUrl = async (type) => {
     if (!Object.values(types).includes(type))
       throw `OAuth Provider ${type} is not enabled.`
 
-    const { params, urlAuthorize } = providers[type]
+    const { params, urlAuthorize, responseType } = providers[type]
     const url = new URL(urlAuthorize)
     const pkce = pkceChallenge()
     url.searchParams.set('code_challenge', pkce.code_challenge) // eg. 3uWDl1fX2ioAqf38eSOFlKnxVEl_VyfaYKG2GyLndKs
@@ -34,7 +34,7 @@ export const oAuthUrl = async (type) => {
       },
     })
 
-    url.searchParams.set('response_type', 'code')
+    url.searchParams.set('response_type', responseType)
     url.searchParams.set('state', state)
     return {
       text: 'success',

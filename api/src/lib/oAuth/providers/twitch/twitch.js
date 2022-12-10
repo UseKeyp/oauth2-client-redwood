@@ -18,6 +18,7 @@ const TWITCH_REDIRECT_URI = isDevelopment
   ? 'http://localhost:8910/redirect/twitch'
   : process.env.APP_DOMAIN + '/redirect/twitch'
 
+const responseType = 'code'
 const params = {
   client_id: process.env.TWITCH_CLIENT_ID,
   scope: TWITCH_SCOPE,
@@ -204,4 +205,5 @@ export const provider = {
   onSubmitCode,
   onConnected,
   onRevoke,
+  responseType,
 }

@@ -96,6 +96,15 @@ This is where you'll decide what you want to happen once a user is connected to 
 
 Here's how the current example providers are currently set up, but they can be changed to fit your needs.
 
+5. Cleanup tasks
+
+If you created a new provider, be sure its exported properly in `api/src/lib/auth/providers/index.js`.
+
+If you're using a provider for Authenticaion, you will need to do the following:
+
+- Add the provider as an option in `api/src/lib/auth/validation.js`
+- Add the provider as an option to `SigninPage.js` and `APPROVED_LOGIN_PROVIDERS` in `web/src/providers/redirection/redirection.js`
+
 #### Authentication
 
 - **Discord**: Create a user with their Discord profile, email, handle, and avatar for creating a user.

@@ -52,19 +52,28 @@ const LoginPortal = () => {
         <div className="mt-6">
           <div className="mb-2">
             <h3 className="text-base font-bold color-grey-light text-center">
-              Sign in to oauth2-demo-client
+              Sign in to oauth2-client-redwood
             </h3>
           </div>
         </div>
 
         <div className="login-portal-container--button-wrapper">
           <button
+            onClick={() => onSubmitSignUp('NODE_OIDC')}
+            className="login-button"
+            size="small"
+          >
+            <div className="flex justify-center align-center items-center m-1">
+              <span className="mr-2">node-oidc-provider</span>
+            </div>
+          </button>
+          <button
             onClick={() => onSubmitSignUp('KEYP')}
             className="login-button"
             size="small"
           >
             <div className="flex justify-center align-center items-center m-1">
-              <span className="mr-2">Sign in with Keyp</span>
+              <span className="mr-2">Keyp</span>
             </div>
           </button>
           <button
@@ -73,7 +82,7 @@ const LoginPortal = () => {
             size="small"
           >
             <div className="flex justify-center align-center items-center m-1">
-              <span className="mr-2">Sign in with Discord</span>
+              <span className="mr-2">Discord</span>
             </div>
           </button>
           {errorText && <div className="mt-2 rw-cell-error">{errorText}</div>}

@@ -19,6 +19,7 @@ const DISCORD_OAUTH_URL_TOKEN = 'https://discord.com/api/oauth2/token'
 const DISCORD_SCOPE = 'identify email'
 const DISCORD_REDIRECT_URI = process.env.APP_DOMAIN + '/redirect/discord'
 
+const responseType = 'code'
 export const params = {
   client_id: process.env.DISCORD_CLIENT_ID,
   scope: DISCORD_SCOPE,
@@ -186,4 +187,5 @@ export const provider = {
   params,
   onSubmitCode,
   onConnected,
+  responseType,
 }
