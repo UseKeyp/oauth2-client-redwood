@@ -1,11 +1,11 @@
-<h1 align="center"><img width="600" style="border-radius: 30px;" src="https://github.com/treasure-chess/treasure-chess/blob/main/github-header.png?raw=true"/></h1>
-<h1 align="center">Welcome to oauth2-client-redwood 👋</h1>
+<h1 align="center"><img width="600" style="border-radius: 30px;" src="https://raw.githubusercontent.com/UseKeyp/.github/main/Keyp-Logo-Color.svg"/></h1>
+<h1 align="center">Welcome to OAuth Client Redwood 👋</h1>
 <p align="center">
   <a href="#" target="_blank">
-    <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
+    <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-blue.svg" />
   </a>
-  <a href="https://twitter.com/treasure chess_" target="_blank">
-    <img alt="Twitter: treasurechess_" src="https://img.shields.io/twitter/follow/treasurechess_.svg?style=social" />
+  <a href="https://twitter.com/UseKeyp" target="_blank">
+    <img alt="Twitter: UseKeyp" src="https://img.shields.io/twitter/follow/UseKeyp.svg?style=social" />
   </a>
 </p>
 
@@ -19,12 +19,13 @@ If you'd like to join our team please let us know. Happy hacking!
 
 ## Providers available
 
-Discord, Coinbase, Twitch, Chess.com, Plaid, and a demo self-hosted provider called "keyp" ([pi0neerpat/oauth2-demo-server](https://github.com/pi0neerpat/oauth2-demo-server)).
+Discord, Coinbase, Twitch, Chess.com, Plaid, and a demo provider using node-oidc-provider.
 
 To add any new provider, simply create a new file in the providers directory.
 
 ## Features
 
+- [Authorization Code Grant Type](https://developer.okta.com/blog/2018/04/10/oauth-authorization-code-grant-type) with support for [PKCE](https://www.oauth.com/oauth2-servers/pkce/)
 - All providers can be used for *Authentication* or *Authorization*
 - Web-side redirection UI
 - No 3rd-party services required, and only one external dependency (pkce-challenge)
@@ -107,9 +108,10 @@ If you're using a provider for Authenticaion, you will need to do the following:
 
 #### Authentication
 
-- **Discord**: Create a user with their Discord profile, email, handle, and avatar for creating a user.
+- **Discord** (PKCE req.): Create a user with their Discord profile, email, handle, and avatar for creating a user.
 - **Chess.com**: Create a user with their Chess.com profile, email, handle, and avatar for creating a user.
 - **Keyp** (in development): Create a new user with their wallet address.
+- **Node OIDC Demo** (PKCE req.): A demo provider that uses [node-oidc-provider](https://github.com/panva/node-oidc-provider-example). I am hosting this for the demo, or you can run it locally yourself (repo [here](https://github.com/UseKeyp/node-oidc-provider-example))
 
 Note if you are using a provider for authentication, you will need add it to the web [redirection provider](https://github.com/pi0neerpat/oauth2-client-redwood/blob/559da2f738a9755405a2a2cf800ca5fca5c23835/web/src/providers/redirection/redirection.js#L9) so that the appropriate query is made upon redirection back to the app.
 
@@ -121,6 +123,7 @@ Note if you are using a provider for authentication, you will need add it to the
 ## Next steps
 
 - [ ] Add more providers (your help needed!)
+- [ ] Security audit
 
 ## Resources 🧑‍💻
 
@@ -128,11 +131,11 @@ OAuth Server libraries: https://oauth.net/code/nodejs/
 
 ## Contributors ✨
 
-👤 **Nifty Chess Team <maintainers@niftychess.com>**
+👤 **Keyp Team <maintainers@UseKeyp.com>**
 
-- Website: https://treasurechess.com
-- Twitter: [@treasurechess\_](https://twitter.com/treasurechess_)
-- GitHub: [@Treasure-Chess](https://github.com/Treasure-Chess)
+- Website: https://UseKeyp.com
+- Twitter: [@UseKeyp](https://twitter.com/UseKeyp)
+- GitHub: [@UseKeyp](https://github.com/UseKeyp)
 
 ## License 📝
 
