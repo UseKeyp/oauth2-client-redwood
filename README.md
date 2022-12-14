@@ -36,9 +36,9 @@ This builds upon previous the work "wrapped dbAuth" (as first introduced in the 
 
 ## Demo 📙
 
+https://oauth2-client-redwood-eta.vercel.app/signin
 
-
-For node-oidc-provider example, the test user email is `foo@example.com`, and password is anything.
+Test credentials for node-oidc-provider: `foo@example.com` password can be anything.
 
 ## Implement in your app
 

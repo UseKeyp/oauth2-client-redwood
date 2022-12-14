@@ -1,6 +1,8 @@
+import { useAuth } from '@redwoodjs/auth'
 import { routes, Link } from '@redwoodjs/router'
 
 const DefaultLayout = ({ children, background }) => {
+  const { isAuthenticated, logOut } = useAuth()
   return (
     <div className={background ? background : 'chess-background'}>
       <div className="flex flex-col min-h-screen">
@@ -11,7 +13,11 @@ const DefaultLayout = ({ children, background }) => {
                 <Link to={routes.home()}>Home</Link>
               </div>
               <div>
-                <Link to={routes.signin()}>Sign In</Link>
+                {isAuthenticated ? (
+                  <button onClick={logOut}>Log Out</button>
+                ) : (
+                  <Link to={routes.signin()}>Sign In</Link>
+                )}
               </div>
             </header>
             <div className="mx-4 min-h-screen mb-15 md:mb-0">{children}</div>

@@ -48,7 +48,7 @@ const Redirect = ({ type }) => {
                 successMessage ? `green` : `[#FFBB0D]`
               }`}
             >
-              Keyp
+              <h3>{type}</h3>
             </div>
             <div className="mt-6 tracking-tight">
               {successMessage}

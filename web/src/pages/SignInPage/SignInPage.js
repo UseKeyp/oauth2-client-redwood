@@ -68,15 +68,6 @@ const LoginPortal = () => {
             </div>
           </button>
           <button
-            onClick={() => onSubmitSignUp('KEYP')}
-            className="login-button"
-            size="small"
-          >
-            <div className="flex justify-center align-center items-center m-1">
-              <span className="mr-2">Keyp</span>
-            </div>
-          </button>
-          <button
             onClick={() => onSubmitSignUp('DISCORD')}
             className="login-button"
             size="small"
