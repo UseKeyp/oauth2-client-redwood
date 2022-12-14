@@ -63,7 +63,9 @@ const Redirect = ({ type }) => {
                 </>
               ) : null}
             </div>
-            {callToAction || <p className="mt-8 ">You can close this page</p>}
+            {callToAction || (
+              <p className="mt-8 ">You will be redirected shortly</p>
+            )}
           </div>
         </div>
       </div>
