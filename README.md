@@ -123,6 +123,7 @@ Note if you are using a provider for authentication, you will need add it to the
 ## Next steps
 
 - [ ] Add more providers (your help needed!)
+- [ ] Simplify code and improve documentation
 - [ ] Security audit
 
 ## Resources 🧑‍💻

@@ -1,4 +1,5 @@
 import fetch from 'cross-fetch'
+import { decode as decodeJwt } from 'jsonwebtoken'
 
 import { db } from 'src/lib/db'
 import { logger } from 'src/lib/logger'
@@ -21,12 +22,12 @@ const params = {
   redirect_uri: NODE_OIDC_REDIRECT_URI,
 }
 
-export const onSubmitCode = async (code, { memberId, codeVerifier }) => {
+export const onSubmitCode = async (code, { codeVerifier }) => {
   try {
     const body = {
       grant_type: 'authorization_code',
       client_id: process.env.NODE_OIDC_CLIENT_ID,
-      client_secret: process.env.NODE_OIDC_CLIENT_SECRET,
+      // client_secret: process.env.NODE_OIDC_CLIENT_SECRET, // Note: for this demo, we don't need this (not sure why)
       redirect_uri: NODE_OIDC_REDIRECT_URI,
       code_verifier: codeVerifier,
       code,
@@ -47,42 +48,49 @@ export const onSubmitCode = async (code, { memberId, codeVerifier }) => {
 
     const {
       access_token: accessToken,
-      refresh_token: refreshToken,
       expires_in: expiration,
+      id_token: idToken,
     } = response
 
-    if (!refreshToken) throw 'Failed to get refresh_token from NODE_OIDC'
+    if (!response.id_token) throw 'Failed to get id_token'
+    const decoded = await decodeJwt(idToken)
+
+    logger.debug({ custom: decoded }, 'decoded id_tokem')
+
+    if (new Date() - new Date(decoded.iat * 1000) > 60 * 1000)
+      throw 'id_token was not issued recently. It must be <1 minute old.'
+
     return {
       accessToken,
       accessTokenExpiration: getExpiration(expiration),
-      refreshToken,
-      memberId,
+      idToken,
+      decoded,
+      idTokenExpiration: new Date(decoded.exp * 1000),
     }
   } catch (e) {
     throw `onSubmitCode() ${e}`
   }
 }
 
-export const onConnected = async ({ accessToken, refreshToken }) => {
+export const onConnected = async ({ accessToken }) => {
   try {
-    const userDetails = await fetch(`${NODE_OIDC_API_DOMAIN}/api/userinfo`, {
+    const userDetails = await fetch(`${NODE_OIDC_API_DOMAIN}/me`, {
       headers: { Authorization: `Bearer ${accessToken}` },
     }).then((res) => {
       if (res.status != 200)
         throw 'NODE_OIDC authorization failed, or secret invalid'
       return res.json()
     })
-    logger.debug({ custom: userDetails }, 'userDetails')
+    logger.debug({ custom: userDetails }, 'User details')
     // For login-type oauth providers, create the user and return the object
     const user = await db.user.upsert({
-      update: { username: userDetails.name, accessToken, refreshToken },
+      update: { email: userDetails.email, accessToken },
       create: {
-        id: userDetails.user_id,
-        username: userDetails.name,
+        id: userDetails.sub,
+        email: userDetails.email,
         accessToken,
-        refreshToken,
       },
-      where: { id: userDetails.user_id },
+      where: { id: userDetails.sub },
     })
     return user
   } catch (e) {
