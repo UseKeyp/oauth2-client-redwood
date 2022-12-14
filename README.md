@@ -47,7 +47,7 @@ NOTE: if you're using a provider only for authorization, skip to step 3.
 1. Setup dbAuth
 
 ```bash
-yarn setup auth dbAuth
+yarn rw setup auth dbAuth
 ```
 
 No need to follow the all instructions there, instead you will update the graphql schema as defined in step 3.
