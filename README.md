@@ -36,7 +36,9 @@ This builds upon previous the work "wrapped dbAuth" (as first introduced in the 
 
 ## Demo 📙
 
-Haven't had time to host a demo yet.
+
+
+For node-oidc-provider example, the test user email is `foo@example.com`, and password is anything.
 
 ## Implement in your app
 
@@ -111,7 +113,7 @@ If you're using a provider for Authenticaion, you will need to do the following:
 - **Discord** (PKCE req.): Create a user with their Discord profile, email, handle, and avatar for creating a user.
 - **Chess.com**: Create a user with their Chess.com profile, email, handle, and avatar for creating a user.
 - **Keyp** (in development): Create a new user with their wallet address.
-- **Node OIDC Demo** (PKCE req.): A demo provider that uses [node-oidc-provider](https://github.com/panva/node-oidc-provider-example). I am hosting this for the demo, or you can run it locally yourself (repo [here](https://github.com/UseKeyp/node-oidc-provider-example))
+- **Node OIDC** (PKCE req.): A demo provider using [node-oidc-provider](https://github.com/panva/node-oidc-provider-example). I am hosting this for the demo, or you can run it locally yourself (repo [here](https://github.com/UseKeyp/node-oidc-provider-example))
 
 Note if you are using a provider for authentication, you will need add it to the web [redirection provider](https://github.com/pi0neerpat/oauth2-client-redwood/blob/559da2f738a9755405a2a2cf800ca5fca5c23835/web/src/providers/redirection/redirection.js#L9) so that the appropriate query is made upon redirection back to the app.
 
@@ -122,14 +124,17 @@ Note if you are using a provider for authentication, you will need add it to the
 - **Plaid**: Grab their Plaid link_token to use with an approved app. (Plaid is evil and you should avoid using them)
 ## Next steps
 
-- [ ] Add more providers (your help needed!)
+- [ ] Add more providers, and have them working in the demo (your help needed!)
 - [ ] Simplify code and improve documentation
 - [ ] Security audit
 
 ## Resources 🧑‍💻
 
-OAuth Server libraries: https://oauth.net/code/nodejs/
-
+- OAuth 2.0 https://oauth.net/2/
+- OAuth Server libraries: https://oauth.net/code/nodejs/
+- oauth4webapi https://github.com/panva/oauth4webapi
+- node-oidc-provider https://github.com/panva/node-oidc-provider
+- openid-client https://github.com/panva/node-openid-client
 ## Contributors ✨
 
 👤 **Keyp Team <maintainers@UseKeyp.com>**
