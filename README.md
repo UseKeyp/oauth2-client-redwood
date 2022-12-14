@@ -12,31 +12,31 @@
 If you'd like to join our team please let us know. Happy hacking!
 
 <p align="center">
-<img width="600px" src="oauth2-client-redwood.gif"/>
+<img width="600px" src="oauth-client-redwood-demo.gif"/>
 </p>
 
 > A feature-complete general-purpose OAuth2 client built using Redwood.
 
 ## Providers available
 
-Discord, Coinbase, Twitch, Chess.com, Plaid, and a demo provider using node-oidc-provider.
+Discord, Coinbase, Twitch, Chess.com, Plaid, and test provider.
 
-To add any new provider, simply create a new file in the providers directory.
+To add a new provider, simply create a new file in the providers directory.
 
 ## Features
 
 - [Authorization Code Grant Type](https://developer.okta.com/blog/2018/04/10/oauth-authorization-code-grant-type) with support for [PKCE](https://www.oauth.com/oauth2-servers/pkce/)
-- All providers can be used for *Authentication* or *Authorization*
+- All providers can be used for *Authentication* (logins) or *Authorization* (user data)
 - Web-side redirection UI
 - No 3rd-party services required, and only one external dependency (pkce-challenge)
 ## Discussion 💬
 
-
-This builds upon previous the work "wrapped dbAuth" (as first introduced in the community forum post [Combining dbAuth + OAuth2](https://community.redwoodjs.com/t/combining-dbauth-oauth2/2452/8)). Current discussion is happening in the [Redwood Community Forum post](https://community.redwoodjs.com/t/i-made-passportjs-for-redwood/4343?u=pi0neerpat)
-
+Current discussion [here](https://community.redwoodjs.com/t/i-made-passportjs-for-redwood/4343?u=pi0neerpat) in the Redwood Community Forum.
 ## Demo 📙
 
 https://oauth2-client-redwood-eta.vercel.app/signin
+
+NOTE: after authentication, there's a bug where the the redirect to profile page may fail, and it appears to ask you to log in again. Simply navigate to /profile to see the user's data.
 
 Test credentials for node-oidc-provider: `foo@example.com` password can be anything.
 
@@ -124,6 +124,7 @@ Note if you are using a provider for authentication, you will need add it to the
 - **Plaid**: Grab their Plaid link_token to use with an approved app. (Plaid is evil and you should avoid using them)
 ## Next steps
 
+- [ ] Add revokation feature to frontend
 - [ ] Add more providers, and have them working in the demo (your help needed!)
 - [ ] Simplify code and improve documentation
 - [ ] Security audit
