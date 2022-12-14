@@ -21,17 +21,18 @@ const params = {
   redirect_uri: NODE_OIDC_REDIRECT_URI,
 }
 
-export const onSubmitCode = async (code, { memberId }) => {
+export const onSubmitCode = async (code, { memberId, codeVerifier }) => {
   try {
     const body = {
       grant_type: 'authorization_code',
       client_id: process.env.NODE_OIDC_CLIENT_ID,
       client_secret: process.env.NODE_OIDC_CLIENT_SECRET,
       redirect_uri: NODE_OIDC_REDIRECT_URI,
+      code_verifier: codeVerifier,
       code,
     }
     const encodedBody = encodeBody(body)
-    logger.debug({ custom: body }, '/token body')
+    logger.debug({ custom: body }, '/token request body')
     const response = await fetch(NODE_OIDC_OAUTH_URL_TOKEN, {
       method: 'post',
       body: encodedBody,
