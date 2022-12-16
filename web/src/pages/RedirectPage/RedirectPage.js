@@ -13,7 +13,7 @@ const Redirect = ({ type }) => {
     )
 
   let callToAction
-  if (type === 'keyp') {
+  if (['chess', 'node_oidc', 'discord'].includes(type)) {
     if (successMessage) {
       callToAction = (
         <button
