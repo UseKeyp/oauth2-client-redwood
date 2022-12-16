@@ -95,19 +95,47 @@ model OAuth {
 
 4. Modify the provider files
 
-This is where you'll decide what you want to happen once a user is connected to the provider. For example, you may want to create a new user in your database (authentication use-case), or you may want to supplement an existing user with new data from the provider (authorization use-case).
+In `api/src/lib/auth/providers/`, you'll find a files for each provider. You can copy one as a template for a new provider. Each provider has the following functions:
 
-Here's how the current example providers are currently set up, but they can be changed to fit your needs.
+```js
+// This is where your backend exchanges the grant for a access token from provider. Each provider has slightly different requirements, so be sure to ensure this is correct.
+export const onSubmitCode = async (code, { memberId }) => {
+    const body = {
+      grant_type: 'authorization_code',
+      client_id: process.env.COINBASE_CLIENT_ID,
+      client_secret: process.env.COINBASE_CLIENT_SECRET,
+      redirect_uri: COINBASE_REDIRECT_URI,
+      code,
+    }
+    const encodedBody = encodeBody(body)
+    const response = await fetch(COINBASE_OAUTH_URL_TOKEN, {
+      method: 'post',
+      body: encodedBody,
+  //...
+}
 
-5. Cleanup tasks
+// This is the logic you want to process after a user is connected to the provider.
+export const onConnected = async ({ accessToken, refreshToken, memberId }) => {
+    const userDetails = await fetch('https://api.coinbase.com/v2/user', {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        'CB-VERSION': '2022-11-22',
+      },
+    }).then((res) => {
+      if (res.status != 200)
+        throw 'Coinbase authorization failed, or secret invalid'
+      return res.json()
+    })
+    const user await db.user.create({
+    // ...
 
-If you created a new provider, be sure its exported properly in `api/src/lib/auth/providers/index.js`.
+    // NOTE: you may need to modify return value here:
+    // For authentication use-cases, it should return the user object.
+    // For authorization it can simply return `{ status: 'SUCCESS' }`.
+    return user
+```
 
-If you're using a provider for Authenticaion, you will need to do the following:
-
-- Add the provider as an option in `api/src/lib/auth/validation.js`
-- Add the provider as an option to `SigninPage.js` and `APPROVED_LOGIN_PROVIDERS` in `web/src/providers/redirection/redirection.js`
-
+Here are the current providers available, and they can each be modified to fit your needs.
 #### Authentication
 
 - **Discord** (PKCE req.): Create a user with their Discord profile, email, handle, and avatar for creating a user.
@@ -122,6 +150,16 @@ Note if you are using a provider for authentication, you will need add it to the
 - **Coinbase**: Grab their ethereum deposit address.
 - **Twitch**: Grab their Twitch username.
 - **Plaid**: Grab their Plaid link_token to use with an approved app. (Plaid is evil and you should avoid using them)
+
+5. Cleanup tasks
+
+If you created a new provider, be sure its exported properly in `api/src/lib/auth/providers/index.js`.
+
+If you're using a provider for Authenticaion, you will need to do the following:
+
+- Add the provider as an option in `api/src/lib/auth/validation.js`
+- Add the provider as an option to `SigninPage.js` and `APPROVED_LOGIN_PROVIDERS` in `web/src/providers/redirection/redirection.js`
+
 ## Next steps
 
 - [ ] Add revokation feature to frontend

@@ -136,6 +136,9 @@ export const onConnected = async ({ refreshToken, accessToken }) => {
       where: { id },
     })
     logger.debug({ custom: user }, 'user')
+    // NOTE you may need to modify return value here:
+    // for authentication - return the user object
+    // for authorization - return { status: 'SUCCESS' }
     return user
   } catch (e) {
     /* eslint-disable no-console */

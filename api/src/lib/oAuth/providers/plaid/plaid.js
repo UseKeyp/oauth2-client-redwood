@@ -175,6 +175,9 @@ https://news.ycombinator.com/item?id=30396156  */
 //         member: { connect: { id: context.currentUser.id } },
 //       },
 //     })
+// NOTE you may need to modify return value here:
+// for authentication - return the user object
+// for authorization - return { status: 'SUCCESS' }
 //     return { status: 'SUCCESS', ramp }
 //   } catch (e) {
 //     Sentry.captureException(e)

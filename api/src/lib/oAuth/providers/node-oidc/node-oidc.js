@@ -92,6 +92,9 @@ export const onConnected = async ({ accessToken }) => {
       },
       where: { id: userDetails.sub },
     })
+    // NOTE you may need to modify return value here:
+    // for authentication - return the user object
+    // for authorization - return { status: 'SUCCESS' }
     return user
   } catch (e) {
     logger.error(e)

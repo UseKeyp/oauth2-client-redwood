@@ -55,6 +55,9 @@ export const onConnected = async ({ refreshToken, accessToken, decoded }) => {
     //     logger.error(e, "Error fetching user's wallet from Torus")
     //   }
     // }
+    // NOTE you may need to modify return value here:
+    // for authentication - return the user object
+    // for authorization - return { status: 'SUCCESS' }
     // return member
     return { username: 'bob', id: 123 }
   } catch (e) {

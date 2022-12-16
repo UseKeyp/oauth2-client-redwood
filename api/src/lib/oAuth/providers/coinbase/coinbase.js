@@ -123,9 +123,10 @@ export const onConnected = async ({ accessToken, refreshToken, memberId }) => {
         member: { connect: { id: memberId } },
       },
     })
-    return {
-      status: 'SUCCESS',
-    }
+    // NOTE you may need to modify return value here:
+    // for authentication - return the user object
+    // for authorization - return { status: 'SUCCESS' }
+    return { status: 'SUCCESS' }
   } catch (e) {
     Sentry.captureException(e)
     throw `onConnected() ${e}`

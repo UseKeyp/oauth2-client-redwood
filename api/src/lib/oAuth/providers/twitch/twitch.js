@@ -105,6 +105,9 @@ export const onConnected = async ({
       },
     })
     await processPromotion('TWITCH_CONNECTION')
+    // NOTE you may need to modify return value here:
+    // for authentication - return the user object
+    // for authorization - return { status: 'SUCCESS' }
     return { status: 'SUCCESS' }
   } catch (e) {
     Sentry.captureException(e)
