@@ -5,7 +5,13 @@ import { navigate } from '@redwoodjs/router'
 import { useOAuth } from 'src/providers/oAuth'
 
 const LOCAL_REDIRECT_TO_KEY = 'redirect_to'
-export const APPROVED_LOGIN_PROVIDERS = ['DISCORD', 'NODE_OIDC']
+
+// If one of these types, treat the incoming action as a login
+export const APPROVED_LOGIN_PROVIDERS = [
+  'DISCORD',
+  'NODE_OIDC',
+  'OAUTH2_SERVER_REDWOOD',
+]
 
 const saveRedirectTo = (redirect) =>
   redirect &&

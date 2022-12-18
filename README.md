@@ -166,28 +166,14 @@ If you're using a provider for Authenticaion, you will need to do the following:
 - [ ] Add more providers, and have them working in the demo (your help needed!)
 - [ ] Simplify code (maybe make it a package?) and improve documentation
 - [ ] Improve the UI
+- [ ] Fix redirect bug to /profile
 - [ ] Security audit
 
 ## Contributing guide
 
-To run this repo locally you'll need the following `.env` variables:
+To run this repo locally:
 
-```
-# NOTE: Must be explicit with the environment
-ENVIRONMENT=dev
-APP_DOMAIN=http://localhost:8910
-SESSION_SECRET=
-DATABASE_URL=
-
-#### node-oidc-provider configs
-NODE_OIDC_API_DOMAIN=https://node-oidc-provider-example.vercel.app
-NODE_OIDC_CLIENT_ID=123
-
-#### Discord provider configs see https://discord.com/developers
-DISCORD_CLIENT_ID=
-DISCORD_CLIENT_SECRET=
-```
-
+- Update your .env from `.env.example`. There are two test servers included.
 ## Resources 🧑‍💻
 
 - OAuth 2.0 https://oauth.net/2/
