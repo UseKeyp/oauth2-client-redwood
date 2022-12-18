@@ -58,21 +58,19 @@ const RedirectionProvider = ({ children }) => {
       type: type.toUpperCase(),
       method: 'login',
     })
-    if (response.error || !response)
+    if (response.error || !response || !response.id)
       return setState({
         isLoading: false,
         errorMessage: response.error || 'Something went wrong',
       })
-    if (response.id) {
-      await reauthenticate()
-      setState({
-        isLoading: false,
-        successMessage: "Great - You're signed in!",
-      })
-      setTimeout(() => {
-        navigate(getRedirectTo() || '/profile')
-      }, [3000])
-    }
+    await reauthenticate()
+    setState({
+      isLoading: false,
+      successMessage: "Great - You're signed in!",
+    })
+    setTimeout(() => {
+      navigate(getRedirectTo() || '/profile')
+    }, [3000])
   }
 
   const completeOAuth = async () => {

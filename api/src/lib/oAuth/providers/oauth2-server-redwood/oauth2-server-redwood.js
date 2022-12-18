@@ -15,7 +15,7 @@ const OAUTH2_SERVER_REDWOOD_OAUTH_URL_TOKEN = `${OAUTH2_SERVER_REDWOOD_API_DOMAI
 
 const OAUTH2_SERVER_REDWOOD_SCOPE = 'openid profile email'
 const OAUTH2_SERVER_REDWOOD_REDIRECT_URI =
-  process.env.APP_DOMAIN + '/redirect/OAUTH2_SERVER_REDWOOD'
+  process.env.APP_DOMAIN + '/redirect/oauth2_server_redwood'
 
 const responseType = 'code'
 const params = {
