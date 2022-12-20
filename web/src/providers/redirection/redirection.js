@@ -1,6 +1,6 @@
 import { useAuth } from '@redwoodjs/auth'
 import { isBrowser } from '@redwoodjs/prerender/browserUtils'
-import { navigate } from '@redwoodjs/router'
+import { routes } from '@redwoodjs/router'
 
 import { useOAuth } from 'src/providers/oAuth'
 
@@ -69,7 +69,7 @@ const RedirectionProvider = ({ children }) => {
       successMessage: "Great - You're signed in!",
     })
     setTimeout(() => {
-      navigate(getRedirectTo() || '/profile')
+      window.location = routes.profile()
     }, [3000])
   }
 
