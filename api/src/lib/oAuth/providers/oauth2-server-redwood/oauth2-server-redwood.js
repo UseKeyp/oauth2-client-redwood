@@ -28,6 +28,7 @@ export const onSubmitCode = async (code, { codeVerifier }) => {
   try {
     const body = {
       grant_type: 'authorization_code',
+      client_secret: process.env.OAUTH2_SERVER_REDWOOD_CLIENT_SECRET,
       client_id: process.env.OAUTH2_SERVER_REDWOOD_CLIENT_ID,
       redirect_uri: OAUTH2_SERVER_REDWOOD_REDIRECT_URI,
       code_verifier: codeVerifier,
