@@ -18,9 +18,15 @@ const LoginPortal = () => {
   }
 
   const onSubmitSignUp = async (type) => {
-    const response = await signUp({ type })
+    let parsedType = type
+    let login_provider = ''
+    if (type.includes('KEYP')) {
+      parsedType = 'OAUTH2_SERVER_REDWOOD'
+      login_provider = `&login_provider=${type.split('KEYP_')[1]}`
+    }
+    const response = await signUp({ type: parsedType })
     if (response.url) {
-      window.location = response.url
+      window.location = response.url + login_provider
     } else {
       toast.error('Something went wrong')
     }
@@ -37,10 +43,22 @@ const LoginPortal = () => {
   }, [error])
 
   useEffect(() => {
-    // if (isAuthenticated) {
-    //   navigate(routes.profile())
-    // }
+    if (isAuthenticated) {
+      navigate(routes.profile())
+    }
   }, [isAuthenticated])
+
+  const getButton = (type, text) => (
+    <button
+      onClick={() => onSubmitSignUp(type)}
+      className="login-button mt-2"
+      size="small"
+    >
+      <div className="flex justify-center align-center items-center m-1">
+        <span className="mr-2">{text}</span>
+      </div>
+    </button>
+  )
 
   return (
     <div className="flex justify-center">
@@ -50,42 +68,29 @@ const LoginPortal = () => {
         </h1>
         <div className="mt-6">
           <div className="mb-2">
-            <h3 className="text-base font-bold color-grey-light text-center">
+            <h2 className="text-base font-bold color-grey-light text-center">
               Sign in
-            </h3>
+            </h2>
           </div>
         </div>
 
         <div className="login-portal-container--button-wrapper ">
-          <button
-            onClick={() => onSubmitSignUp('NODE_OIDC')}
-            className="login-button mt-2"
-            size="small"
-          >
-            <div className="flex justify-center align-center items-center m-1">
-              <span className="mr-2">node-oidc-provider</span>
-            </div>
-          </button>
+          {getButton('NODE_OIDC', 'oidc-provider')}
           <br />
-          <button
-            onClick={() => onSubmitSignUp('OAUTH2_SERVER_REDWOOD')}
-            className="login-button mt-2"
-            size="small"
-          >
-            <div className="flex justify-center align-center items-center m-1">
-              <span className="mr-2">oauth2-server-redwood</span>
-            </div>
-          </button>
+          {getButton('OAUTH2_SERVER_REDWOOD', 'oauth2-server-redwood')}
           <br />
-          <button
-            onClick={() => onSubmitSignUp('DISCORD')}
-            className="login-button "
-            size="small"
-          >
-            <div className="flex justify-center align-center items-center m-1">
-              <span className="mr-2">Discord</span>
-            </div>
-          </button>
+          {getButton('DISCORD', 'Discord')}
+          <br />
+          {process.env.SHOW_KEYP_PROVIDERS && (
+            <>
+              <h4 className="text-base font-bold color-grey-light text-center">
+                Keyp Providers
+              </h4>
+              {getButton('KEYP_DISCORD', 'Discord')}
+              {getButton('KEYP_NODE_OIDC', 'oidc-provider')}
+              {getButton('KEYP_GOOGLE', 'Google')}
+            </>
+          )}
           {errorText && <div className="mt-2 rw-cell-error">{errorText}</div>}
         </div>
         <div className="w-full text-center"></div>
