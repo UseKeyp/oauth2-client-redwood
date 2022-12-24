@@ -18,6 +18,8 @@ export const onConnected = async ({ refreshToken, accessToken, decoded }) => {
     // if (member.banned) {
     //   throw new AuthenticationError('user is banned')
     // }
+
+    // Prevent token substitution attacks. See https://openid.net/specs/openid-connect-core-1_0.html#TokenSubstitution
     // if (user_id !== member.id)
     //   throw new AuthenticationError(
     //     `user_id in JWT doesn't match player_id from API`

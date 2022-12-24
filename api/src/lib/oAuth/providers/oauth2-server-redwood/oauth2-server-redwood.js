@@ -13,7 +13,7 @@ export const OAUTH2_SERVER_REDWOOD_OAUTH_URL_AUTHORIZE = `${OAUTH2_SERVER_REDWOO
 
 const OAUTH2_SERVER_REDWOOD_OAUTH_URL_TOKEN = `${OAUTH2_SERVER_REDWOOD_API_DOMAIN}/token`
 
-const OAUTH2_SERVER_REDWOOD_SCOPE = 'openid profile email'
+const OAUTH2_SERVER_REDWOOD_SCOPE = 'openid profile email offline_access'
 const OAUTH2_SERVER_REDWOOD_REDIRECT_URI =
   process.env.APP_DOMAIN + '/redirect/oauth2_server_redwood'
 
@@ -57,7 +57,8 @@ export const onSubmitCode = async (code, { codeVerifier }) => {
     if (!response.id_token) throw 'Failed to get id_token'
     const decoded = await decodeJwt(idToken)
 
-    logger.debug({ custom: decoded }, 'decoded id_tokem')
+    logger.debug({ custom: response }, '/token response')
+    logger.debug({ custom: decoded }, 'decoded id_token')
 
     if (new Date() - new Date(decoded.iat * 1000) > 60 * 1000)
       throw 'id_token was not issued recently. It must be <1 minute old.'
@@ -74,7 +75,7 @@ export const onSubmitCode = async (code, { codeVerifier }) => {
   }
 }
 
-export const onConnected = async ({ accessToken }) => {
+export const onConnected = async ({ accessToken, decoded }) => {
   try {
     const userDetails = await fetch(`${OAUTH2_SERVER_REDWOOD_API_DOMAIN}/me`, {
       headers: { Authorization: `Bearer ${accessToken}` },
@@ -83,8 +84,13 @@ export const onConnected = async ({ accessToken }) => {
         throw 'OAUTH2_SERVER_REDWOOD authorization failed, or secret invalid'
       return res.json()
     })
-    logger.debug({ custom: userDetails }, 'User details')
-    // For login-type oauth providers, create the user and return the object
+
+    // Prevent token substitution attacks. See https://openid.net/specs/openid-connect-core-1_0.html#TokenSubstitution
+    if (decoded.sub != userDetails.sub)
+      throw "id_token's sub does not match userInfo"
+
+    logger.debug({ custom: userDetails }, 'User info')
+
     const user = await db.user.upsert({
       update: { email: userDetails.email, accessToken },
       create: {

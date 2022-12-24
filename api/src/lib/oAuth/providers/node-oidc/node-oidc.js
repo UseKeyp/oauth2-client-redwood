@@ -72,7 +72,7 @@ export const onSubmitCode = async (code, { codeVerifier }) => {
   }
 }
 
-export const onConnected = async ({ accessToken }) => {
+export const onConnected = async ({ accessToken, decoded }) => {
   try {
     const userDetails = await fetch(`${NODE_OIDC_API_DOMAIN}/me`, {
       headers: { Authorization: `Bearer ${accessToken}` },
@@ -81,7 +81,13 @@ export const onConnected = async ({ accessToken }) => {
         throw 'NODE_OIDC authorization failed, or secret invalid'
       return res.json()
     })
+
+    // Prevent token substitution attacks. See https://openid.net/specs/openid-connect-core-1_0.html#TokenSubstitution
+    if (decoded.sub != userDetails.sub)
+      throw "id_token's sub does not match userInfo"
+
     logger.debug({ custom: userDetails }, 'User details')
+
     // For login-type oauth providers, create the user and return the object
     const user = await db.user.upsert({
       update: { email: userDetails.email, accessToken },
