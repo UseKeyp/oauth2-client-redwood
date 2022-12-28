@@ -4,7 +4,6 @@ import { db } from 'src/lib/db'
 import { isDevelopment } from 'src/lib/helpers'
 import { logger } from 'src/lib/logger'
 import { encodeBody, getExpiration } from 'src/lib/oAuth/helpers'
-import { processPromotion } from 'src/lib/promotions'
 import Sentry from 'src/lib/sentry'
 
 export const TWITCH = 'TWITCH'
@@ -90,6 +89,7 @@ export const onConnected = async ({
       return res.json()
     })
     logger.debug({ custom: usersList }, 'Twitch user details')
+
     await db.member.update({
       where: { id: memberId },
       data: {
@@ -104,7 +104,7 @@ export const onConnected = async ({
         },
       },
     })
-    await processPromotion('TWITCH_CONNECTION')
+
     // NOTE you may need to modify return value here:
     // for authentication - return the user object
     // for authorization - return { status: 'SUCCESS' }

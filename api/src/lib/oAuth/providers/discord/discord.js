@@ -109,7 +109,6 @@ export const refreshDiscordTokens = async (refreshToken) => {
 
 export const onConnected = async ({ refreshToken, accessToken }) => {
   try {
-    // TODO: fetch user details
     const userDetails = await fetchDiscord({ path: `users/@me`, accessToken })
     logger.debug({ custom: userDetails }, 'userDetails')
     if (!userDetails.verified)
@@ -136,6 +135,7 @@ export const onConnected = async ({ refreshToken, accessToken }) => {
       where: { id },
     })
     logger.debug({ custom: user }, 'user')
+
     // NOTE you may need to modify return value here:
     // for authentication - return the user object
     // for authorization - return { status: 'SUCCESS' }

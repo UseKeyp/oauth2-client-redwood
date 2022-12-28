@@ -1,21 +1,15 @@
-<h1 align="center"><img width="600" style="border-radius: 30px;" src="https://raw.githubusercontent.com/UseKeyp/.github/main/Keyp-Logo-Color.svg"/></h1>
-<h1 align="center">Welcome to OAuth2 Client Redwood 👋</h1>
-<p align="center">
+<h1 align="left">Welcome to Oauth2 Client Redwood 👋</h1>
+<p align="left">
   <a href="#" target="_blank">
     <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-blue.svg" />
   </a>
-  <a href="https://twitter.com/UseKeyp" target="_blank">
-    <img alt="Twitter: UseKeyp" src="https://img.shields.io/twitter/follow/UseKeyp.svg?style=social" />
-  </a>
-</p>
-
-If you'd like to join our team please let us know. Happy hacking!
-
-<p align="center">
-<img width="600px" src="oauth-client-redwood-demo.gif"/>
 </p>
 
 > A feature-complete general-purpose OAuth2 client built using Redwood.
+
+<p align="left">
+<img width="600px" src="oauth-client-redwood-demo.gif"/>
+</p>
 
 ## Providers available
 
@@ -25,14 +19,14 @@ To add a new provider, simply create a new file in the providers directory.
 
 ## Features
 
-- [Authorization Code Grant Type](https://developer.okta.com/blog/2018/04/10/oauth-authorization-code-grant-type) with support for [PKCE](https://www.oauth.com/oauth2-servers/pkce/)
+- [Authorization Code Grant Type](https://developer.okta.com/blog/2018/04/10/oauth-authorization-code-grant-type) with supoort for [OAuth2.1](https://oauth.net/2.1/) including [PKCE](https://www.oauth.com/oauth2-servers/pkce/)
 - All providers can be used for *Authentication* (logins) or *Authorization* (user data)
 - Web-side redirection UI
 - No 3rd-party services required, and only one external dependency (pkce-challenge)
 ## Discussion 💬
 
 Current discussion [here](https://community.redwoodjs.com/t/i-made-passportjs-for-redwood/4343?u=pi0neerpat) in the Redwood Community Forum.
-## Demo 📙
+## Demo ⏯️
 
 https://oauth2-client-redwood-eta.vercel.app/signin
 
@@ -169,7 +163,7 @@ If you're using a provider for Authenticaion, you will need to do the following:
 - [ ] Fix redirect bug to /profile
 - [ ] Security audit
 
-## Contributing guide
+## Contributing 💡
 
 To run this repo locally:
 
@@ -178,21 +172,21 @@ To run this repo locally:
 
 - OAuth 2.0 https://oauth.net/2/
 - OAuth Server libraries: https://oauth.net/code/nodejs/
+- oidc-client-ts https://github.com/authts/oidc-client-ts
 - oauth4webapi https://github.com/panva/oauth4webapi
-- node-oidc-provider https://github.com/panva/node-oidc-provider
 - openid-client https://github.com/panva/node-openid-client
-## Contributors ✨
+- node-oidc-provider https://github.com/panva/node-oidc-provider
+- https://authguidance.com/
 
-👤 **Keyp Team <maintainers@UseKeyp.com>**
+## Sponsors ❤️
 
-- Website: https://UseKeyp.com
-- Twitter: [@UseKeyp](https://twitter.com/UseKeyp)
-- GitHub: [@UseKeyp](https://github.com/UseKeyp)
+[<img height="65" align="left" src="https://github.com/UseKeyp/.github/blob/main/Keyp-Logo-Color.png?raw=true" alt="keyp-logo">][sponsor-keyp] Improve onboarding and payments in your games & web3 apps effortlessly with OAuth logins for wallets and debit card transactions. [Create a Keyp account; it's free!][sponsor-keyp]<br><br>
 
 ## License 📝
 
-Copyright © 2022 Nifty Chess, Inc.<br />
+Copyright © 2023 Nifty Chess, Inc.<br />
 This project is MIT licensed.
 
+[sponsor-keyp]: https://UseKeyp.com
 
 

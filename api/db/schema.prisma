@@ -13,26 +13,31 @@ generator client {
 // TODO: Please remove the following example:
 
 model User {
-  id           String   @id // Chess.com id
-  username     String?  @unique // platform username
-  address      String?  @unique // Torus wallet address
-  locale       String?
-  email        String?  @unique // Email address
+  id          String   @id
+  username    String?  @unique // platform username
+  address     String?  @unique // Torus wallet address
+  locale      String?
+  email       String?  @unique // Email address
   // --------------- STATE --------------
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  mfa_enabled  Boolean?
-  imageSrc     String? // Avatar URL
-  country      String? // Player's country  eg. US, DE
-  mintCredits  Int      @default(3) // Mint for free!
-  banned       Boolean  @default(false)
-  blocked      Boolean? // Prevents others from interacting with this person
-  refreshToken String? // Discord.com Oauth
-  accessToken  String? // Discord.com Oauth
-  OAuth        OAuth[]
-  betaAccess   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  mfa_enabled Boolean?
+  imageSrc    String? // Avatar URL
+  country     String? // Player's country  eg. US, DE
+  banned      Boolean  @default(false)
+  blocked     Boolean? // Prevents others from interacting with this person
+  betaAccess  Boolean  @default(false)
+
+  // For authentication only
+  refreshToken String?
+  accessToken  String?
+
+  oauth           OAuth[]
+  oauthConnection OAuthConnection[]
 }
 
+// OAuth2 session details for state + PKCE
+// Used for both authorization and authentication
 model OAuth {
   state         String   @id
   codeChallenge String
@@ -40,4 +45,25 @@ model OAuth {
   createdAt     DateTime @default(now())
   user          User?    @relation(fields: [userId], references: [id])
   userId        String?
+}
+
+// For authorization only
+model OAuthConnection {
+  id           String              @id @default(uuid())
+  createdAt    DateTime            @default(now())
+  updatedAt    DateTime            @updatedAt
+  user         User                @relation(fields: [userId], references: [id])
+  userId       String
+  type         OAuthConnectionType
+  revoked      Boolean             @default(false)
+  refreshToken String?
+  accessToken  String
+  expiration   DateTime?
+}
+
+enum OAuthConnectionType {
+  TWITCH
+  COINBASE
+  DISCORD
+  CHESS
 }

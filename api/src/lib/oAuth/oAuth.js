@@ -20,6 +20,8 @@ export const oAuthUrl = async (type) => {
     Object.keys(params).map((key) => {
       url.searchParams.set(key, params[key])
     })
+    // Note: Feel free to add additional data to state, but if the authorization server doesn't
+    // support PKCE yet you must include a random string for CSRF protection
     const state = uuidv4()
     // For oAuth codeGrant, we sometimes need the user id
     let userId
