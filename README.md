@@ -19,7 +19,7 @@ To add a new provider, simply create a new file in the providers directory.
 
 ## Features
 
-- [Authorization Code Grant Type](https://developer.okta.com/blog/2018/04/10/oauth-authorization-code-grant-type) with support for [PKCE](https://www.oauth.com/oauth2-servers/pkce/)
+- [Authorization Code Grant Type](https://developer.okta.com/blog/2018/04/10/oauth-authorization-code-grant-type) with supoort for [OAuth2.1](https://oauth.net/2.1/) including [PKCE](https://www.oauth.com/oauth2-servers/pkce/)
 - All providers can be used for *Authentication* (logins) or *Authorization* (user data)
 - Web-side redirection UI
 - No 3rd-party services required, and only one external dependency (pkce-challenge)
@@ -172,9 +172,12 @@ To run this repo locally:
 
 - OAuth 2.0 https://oauth.net/2/
 - OAuth Server libraries: https://oauth.net/code/nodejs/
+- oidc-client-ts https://github.com/authts/oidc-client-ts
 - oauth4webapi https://github.com/panva/oauth4webapi
-- node-oidc-provider https://github.com/panva/node-oidc-provider
 - openid-client https://github.com/panva/node-openid-client
+- node-oidc-provider https://github.com/panva/node-oidc-provider
+- https://authguidance.com/
+
 ## Sponsors ❤️
 
 [<img height="65" align="left" src="https://github.com/UseKeyp/.github/blob/main/Keyp-Logo-Color.png?raw=true" alt="keyp-logo">][sponsor-keyp] Improve onboarding and payments in your games & web3 apps effortlessly with OAuth logins for wallets and debit card transactions. [Create a Keyp account; it's free!][sponsor-keyp]<br><br>

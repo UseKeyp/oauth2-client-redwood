@@ -29,7 +29,7 @@ const RedirectionContext = React.createContext({})
 const RedirectionProvider = ({ children }) => {
   const [state, setState] = React.useState({ isLoading: true })
 
-  const { reauthenticate, logIn } = useAuth()
+  const { logIn } = useAuth()
   const { submitCodeGrant } = useOAuth()
 
   let url
@@ -63,7 +63,6 @@ const RedirectionProvider = ({ children }) => {
         isLoading: false,
         errorMessage: response.error || 'Something went wrong',
       })
-    await reauthenticate()
     setState({
       isLoading: false,
       successMessage: "Great - You're signed in!",
