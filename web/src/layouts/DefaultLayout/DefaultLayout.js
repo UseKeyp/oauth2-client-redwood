@@ -16,7 +16,7 @@ const DefaultLayout = ({ children, background }) => {
                 {isAuthenticated ? (
                   <button onClick={logOut}>Log Out</button>
                 ) : (
-                  <Link to={routes.signin()}>Sign In</Link>
+                  <Link to={routes.login()}>Sign In</Link>
                 )}
               </div>
             </header>

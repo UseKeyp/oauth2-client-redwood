@@ -28,7 +28,7 @@ const Redirect = ({ type }) => {
     } else {
       callToAction = (
         <button
-          onClick={() => navigate(routes.signin())}
+          onClick={() => navigate(routes.login())}
           className="text-s mt-6"
           size="large"
           color="green"

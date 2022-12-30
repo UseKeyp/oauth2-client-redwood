@@ -28,7 +28,7 @@ To add a new provider, simply create a new file in the providers directory.
 Current discussion [here](https://community.redwoodjs.com/t/i-made-passportjs-for-redwood/4343?u=pi0neerpat) in the Redwood Community Forum.
 ## Demo ⏯️
 
-https://oauth2-client-redwood-eta.vercel.app/signin
+https://oauth2-client-redwood-eta.vercel.app/login
 
 NOTE: after authentication, there's a bug where the the redirect to profile page may fail, and it appears to ask you to log in again. Simply navigate to /profile to see the user's data.
 

@@ -1,11 +1,11 @@
 import { render } from '@redwoodjs/testing'
 
-import SignInPage from './SignInPage'
+import LoginPage from './LoginPage'
 
-describe('SignInPage', () => {
+describe('LoginPage', () => {
   it('renders successfully', () => {
     expect(() => {
-      render(<SignInPage />)
+      render(<LoginPage />)
     }).not.toThrow()
   })
 })

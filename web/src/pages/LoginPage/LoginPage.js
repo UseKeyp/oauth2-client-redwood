@@ -54,7 +54,7 @@ const LoginPortal = () => {
       className="login-button mt-2"
       size="small"
     >
-      <div className="flex justify-center align-center items-center m-1">
+      <div className="align-center m-1 flex items-center justify-center">
         <span className="mr-2">{text}</span>
       </div>
     </button>
@@ -63,12 +63,12 @@ const LoginPortal = () => {
   return (
     <div className="flex justify-center">
       <div className="login-portal-container w-80 sm:w-96">
-        <h1 className="text-2xl tracking-tight font-extrabold text-gray-900 sm:text-3xl md:text-4xl">
+        <h1 className="text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl md:text-4xl">
           <span className="block xl:inline">Oauth2 Client Redwood</span>
         </h1>
         <div className="mt-6">
           <div className="mb-2">
-            <h2 className="text-base font-bold color-grey-light text-center">
+            <h2 className="color-grey-light text-center text-base font-bold">
               Sign in
             </h2>
           </div>
@@ -83,7 +83,7 @@ const LoginPortal = () => {
           <br />
           {process.env.SHOW_KEYP_PROVIDERS && (
             <>
-              <h4 className="text-base font-bold color-grey-light text-center">
+              <h4 className="color-grey-light text-center text-base font-bold">
                 Keyp Providers
               </h4>
               {getButton('KEYP_DISCORD', 'Discord')}
@@ -91,15 +91,15 @@ const LoginPortal = () => {
               {getButton('KEYP_GOOGLE', 'Google')}
             </>
           )}
-          {errorText && <div className="mt-2 rw-cell-error">{errorText}</div>}
+          {errorText && <div className="rw-cell-error mt-2">{errorText}</div>}
         </div>
         <div className="w-full text-center"></div>
         <h4 className="mt-6">
-          <a className="mr-2 text-blue" href="/">
+          <a className="text-blue mr-2" href="/">
             Terms of Service
           </a>
           ·
-          <a className="ml-2 text-blue" href="/">
+          <a className="text-blue ml-2" href="/">
             Privacy Policy
           </a>
         </h4>
@@ -108,7 +108,7 @@ const LoginPortal = () => {
   )
 }
 
-const SignInPage = () => {
+const LoginPage = () => {
   return (
     <>
       <MetaTags title="Sign In" description="Join to start collecting." />
@@ -117,4 +117,4 @@ const SignInPage = () => {
   )
 }
 
-export default SignInPage
+export default LoginPage

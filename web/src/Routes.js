@@ -19,9 +19,9 @@ const Routes = () => {
         <Set wrap={DefaultLayout}>
           <Route path="/" page={HomePage} name="home" />
           <Route path="/redirect/{type}" page={RedirectPage} name="redirect" />
-          <Route path="/signin" page={SignInPage} name="signin" />
+          <Route path="/login" page={LoginPage} name="login" />
           <Route notfound page={NotFoundPage} />
-          <Private unauthenticated="signin">
+          <Private unauthenticated="login">
             <Route path="/profile" page={ProfilePage} name="profile" />
           </Private>
         </Set>
