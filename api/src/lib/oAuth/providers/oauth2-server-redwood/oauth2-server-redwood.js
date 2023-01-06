@@ -13,7 +13,7 @@ export const OAUTH2_SERVER_REDWOOD_OAUTH_URL_AUTHORIZE = `${OAUTH2_SERVER_REDWOO
 
 const OAUTH2_SERVER_REDWOOD_OAUTH_URL_TOKEN = `${OAUTH2_SERVER_REDWOOD_API_DOMAIN}/token`
 
-const OAUTH2_SERVER_REDWOOD_SCOPE = 'openid profile email offline_access'
+const OAUTH2_SERVER_REDWOOD_SCOPE = 'openid profile email'
 const OAUTH2_SERVER_REDWOOD_REDIRECT_URI =
   process.env.APP_DOMAIN + '/redirect/oauth2_server_redwood'
 
@@ -28,7 +28,7 @@ export const onSubmitCode = async (code, { codeVerifier }) => {
   try {
     const body = {
       grant_type: 'authorization_code',
-      client_secret: process.env.OAUTH2_SERVER_REDWOOD_CLIENT_SECRET,
+      // client_secret: process.env.OAUTH2_SERVER_REDWOOD_CLIENT_SECRET,
       client_id: process.env.OAUTH2_SERVER_REDWOOD_CLIENT_ID,
       redirect_uri: OAUTH2_SERVER_REDWOOD_REDIRECT_URI,
       code_verifier: codeVerifier,
@@ -40,9 +40,12 @@ export const onSubmitCode = async (code, { codeVerifier }) => {
       method: 'post',
       body: encodedBody,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    }).then((res) => {
-      if (res.status != 200)
-        throw `OAUTH2_SERVER_REDWOOD API failed for /token. Returned ${res.status} - ${res.statusText}`
+    }).then(async (res) => {
+      const status = res.status
+      if (status !== 200) {
+        const text = await res.json()
+        throw `OAUTH2_SERVER_REDWOOD API failed for /token. Returned ${status} - ${text.error} ${text.error_description}`
+      }
       return res.json()
     })
     if (response.error)
