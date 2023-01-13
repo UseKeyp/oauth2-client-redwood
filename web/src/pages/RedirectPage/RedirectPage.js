@@ -5,6 +5,7 @@ import { useRedirection } from 'src/providers/redirection'
 
 const Redirect = ({ type }) => {
   const { errorMessage, successMessage, isLoading } = useRedirection()
+  console.log(errorMessage)
   if (isLoading)
     return (
       <div className="min-w-full min-h-screen flex items-center justify-center">
@@ -25,8 +26,20 @@ const Redirect = ({ type }) => {
           See Profile
         </button>
       )
-    } else {
+    } else if (errorMessage === 'End-User aborted interaction' || errorMessage === 'The resource owner or authorization server denied the request') {
       navigate(routes.home())
+    }
+    else {
+      callToAction = (
+        <button
+          onClick={() => navigate(routes.login())}
+          className="text-s mt-6"
+          size="large"
+          color="green"
+        >
+          Try again
+        </button>
+      )
     }
   }
   return (
