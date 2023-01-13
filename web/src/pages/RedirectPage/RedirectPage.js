@@ -5,7 +5,6 @@ import { useRedirection } from 'src/providers/redirection'
 
 const Redirect = ({ type }) => {
   const { errorMessage, successMessage, isLoading } = useRedirection()
-  console.log(errorMessage)
   if (isLoading)
     return (
       <div className="min-w-full min-h-screen flex items-center justify-center">
