@@ -26,16 +26,7 @@ const Redirect = ({ type }) => {
         </button>
       )
     } else {
-      callToAction = (
-        <button
-          onClick={() => navigate(routes.login())}
-          className="text-s mt-6"
-          size="large"
-          color="green"
-        >
-          Try again
-        </button>
-      )
+      navigate(routes.home())
     }
   }
   return (
