@@ -5,6 +5,11 @@ import { useRedirection } from 'src/providers/redirection'
 
 const Redirect = ({ type }) => {
   const { errorMessage, successMessage, isLoading } = useRedirection()
+
+  if (errorMessage === 'End-User aborted interaction' || errorMessage === 'The resource owner or authorization server denied the request') {
+    navigate(routes.home())
+  }
+
   if (isLoading)
     return (
       <div className="min-w-full min-h-screen flex items-center justify-center">
