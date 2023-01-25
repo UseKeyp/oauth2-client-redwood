@@ -157,6 +157,7 @@ If you're using a provider for Authenticaion, you will need to do the following:
 ## Next steps
 
 - [ ] Add revokation feature to frontend
+- [ ] Publish client as package `oauth2-client-redwood`, and allow easily configuring new clients. 
 - [ ] Add more providers, and have them working in the demo (your help needed!)
 - [ ] Simplify code (maybe make it a package?) and improve documentation
 - [ ] Improve the UI
